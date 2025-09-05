@@ -2,11 +2,11 @@
  * Vaastu 360 Theme Configuration
  *
  * To change the entire site's color scheme:
- * 1. Modify --brand-primary-hue, --brand-primary-saturation, --brand-primary-lightness
- * 2. Adjust --brand-secondary-hue, --brand-secondary-saturation, --brand-secondary-lightness
+ * 1. Modify --brand-primary (e.g., #0D1164 for blue)
+ * 2. Adjust --brand-secondary and other brand colors
  * 3. For typography, update --font-family-primary and font size variables
  *
- * Example: To change to blue theme, set --brand-primary-hue: 210;
+ * Example: To change to blue theme, set --brand-primary: #0D1164;
  */
 
 /** @import must precede all other statements */
@@ -25,15 +25,14 @@
  */
  :root {
    /* Centralized Brand Variables - Change these to update entire site */
-   --brand-primary-hue: 318;
-   --brand-primary-saturation: 61%;
-   --brand-primary-lightness: 16%;
-   --brand-secondary-hue: 318;
-   --brand-secondary-saturation: 47%;
-   --brand-secondary-lightness: 94%;
+   --brand-primary: #101142;        /* Main brand color */
+   --brand-secondary: #74038d;      /* Secondary color */
+   --brand-background: #ffffff;     /* Page background */
+   --brand-foreground: #000000;    /* Text color */
+   --brand-accent: #22c55e;         /* Accent color */
 
    /* Typography Variables */
-   --font-family-primary: "Roboto", -apple-system, system-ui, sans-serif;
+   --font-family-primary: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
    --font-size-base: 1rem;
    --font-size-lg: 1.125rem;
    --font-size-xl: 1.25rem;
@@ -46,39 +45,39 @@
    --line-height-base: 1.5;
 
    /* Vaastu 360 Brand Colors */
-   --background: var(--brand-secondary-hue) 75% 98%;
-   --foreground: 0 0% 0%;
+   --background: var(--brand-background);
+   --foreground: var(--brand-foreground);
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
+   --card: #ffffff;
+   --card-foreground: var(--brand-foreground);
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
+   --popover: #ffffff;
+   --popover-foreground: var(--brand-foreground);
 
-    /* Primary: Dark purple/maroon #421034 */
-    --primary: var(--brand-primary-hue) var(--brand-primary-saturation) var(--brand-primary-lightness);
-    --primary-foreground: 0 0% 100%;
+   /* Primary: Dark purple/maroon */
+   --primary: var(--brand-primary);
+   --primary-foreground: #ffffff;
 
-    /* Secondary: Light purple #F7EEF9 */
-    --secondary: var(--brand-secondary-hue) var(--brand-secondary-saturation) var(--brand-secondary-lightness);
-    --secondary-foreground: var(--brand-primary-hue) var(--brand-primary-saturation) var(--brand-primary-lightness);
+   /* Secondary: Light purple */
+   --secondary: var(--brand-secondary);
+   --secondary-foreground: var(--brand-primary);
 
-    --muted: 318 47% 94%;
-    --muted-foreground: 0 0% 35%;
+    --muted: var(--brand-secondary);
+    --muted-foreground: #555555;
 
-    --accent: 318 47% 94%;
-    --accent-foreground: 318 61% 16%;
+    --accent: var(--brand-secondary);
+    --accent-foreground: var(--brand-primary);
 
     /* Success green for checkmarks */
-    --success: 120 99% 35%;
-    --success-foreground: 0 0% 100%;
+    --success: #22c55e;
+    --success-foreground: #ffffff;
 
-    --destructive: 0 76% 55%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: #dc2626;
+    --destructive-foreground: #ffffff;
 
-    --border: 318 20% 88%;
-    --input: 318 20% 88%;
-    --ring: 318 61% 16%;
+    --border: #e5e7eb;
+    --input: #e5e7eb;
+    --ring: var(--brand-primary);
 
     --radius: 0.75rem;
 
@@ -94,17 +93,17 @@
   }
 
   .dark {
-    --background: var(--brand-primary-hue) var(--brand-primary-saturation) 8%;
-    --foreground: 0 0% 98%;
+    --background: #1a1a1a;
+    --foreground: #f8f8f8;
 
-    --card: var(--brand-primary-hue) var(--brand-primary-saturation) 10%;
-    --card-foreground: 0 0% 98%;
+    --card: #2a2a2a;
+    --card-foreground: #f8f8f8;
 
-    --popover: var(--brand-primary-hue) var(--brand-primary-saturation) 10%;
-    --popover-foreground: 0 0% 98%;
+    --popover: #2a2a2a;
+    --popover-foreground: #f8f8f8;
 
-    --primary: var(--brand-primary-hue) 70% 85%;
-    --primary-foreground: var(--brand-primary-hue) var(--brand-primary-saturation) var(--brand-primary-lightness);
+    --primary: #d4a574;
+    --primary-foreground: var(--brand-primary);
 
     --secondary: 318 30% 15%;
     --secondary-foreground: 0 0% 98%;
