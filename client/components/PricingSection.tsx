@@ -91,7 +91,7 @@ const PricingSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section id="pricing" className="py-20 bg-white">
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
@@ -106,7 +106,7 @@ const PricingSection: React.FC = () => {
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`pricing-card relative bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${
+              className={`pricing-card relative bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${
                 plan.popular ? 'ring-2 ring-[#421034] shadow-lg' : ''
               }`}
             >

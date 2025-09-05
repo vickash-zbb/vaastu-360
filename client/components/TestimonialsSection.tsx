@@ -66,7 +66,7 @@ const TestimonialsSection: React.FC = () => {
   };
 
   return (
-    <section ref={sectionRef} className="py-20 bg-gradient-to-br from-[#FDF6FC] to-[#F7EEF9]">
+    <section id="testimonials" ref={sectionRef} className="py-20 bg-gradient-to-br from-[#FDF6FC] to-[#F7EEF9]">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">

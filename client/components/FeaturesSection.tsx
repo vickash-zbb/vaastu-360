@@ -61,7 +61,7 @@ const FeaturesSection: React.FC = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="py-20 bg-gradient-to-br from-[#FDF6FC] to-[#F7EEF9]">
+    <section id="features" ref={sectionRef} className="py-20 bg-gradient-to-br from-[#FDF6FC] to-[#F7EEF9]">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
@@ -76,7 +76,7 @@ const FeaturesSection: React.FC = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="feature-card group bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
+              className="feature-card group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
             >
               {/* Icon */}
               <div className="mb-6">

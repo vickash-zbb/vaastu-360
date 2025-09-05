@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Button } from './ui/button';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Link } from 'react-router-dom';
 
 const FinalCTASection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -51,7 +52,7 @@ const FinalCTASection: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-20 overflow-hidden bg-primary">
+    <section id="cta" ref={sectionRef} className="relative py-20 overflow-hidden bg-primary">
       {/* Background Elements */}
       <div className="cta-bg absolute inset-0 opacity-10">
         <div className="grid grid-cols-6 grid-rows-6 h-full w-full">
@@ -77,7 +78,7 @@ const FinalCTASection: React.FC = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="cta-content text-center max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-6l font-bold text-white mb-6 leading-tight">
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
             Bring Balance to Your Space with AI-Powered Vaastu
           </h2>
           <p className=" text-white/90 mb-8 leading-relaxed">
@@ -85,15 +86,14 @@ const FinalCTASection: React.FC = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-            <Button
-              size="lg"
-              className="bg-white text-primary hover:bg-gray-100 px-8 py-4 text-lg font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-            >
-              Get Started Free →
-            </Button>
-            {/* <p className="text-white/80 text-sm">
-              Join 10,000+ users • 30-day free trial • Cancel anytime
-            </p> */}
+            <Link to="/subscription">
+              <Button
+                size="lg"
+                className="bg-white text-primary hover:bg-gray-100 px-8 py-4 text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              >
+                Get Started Free →
+              </Button>
+            </Link>
           </div>
 
           {/* Trust indicators */}
