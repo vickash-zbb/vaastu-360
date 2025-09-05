@@ -620,7 +620,7 @@ function DashboardOverview({
               <SelectTrigger>
                 <SelectValue placeholder="Status" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white">
                 <SelectItem value="all">All Status</SelectItem>
                 <SelectItem value="completed">Completed</SelectItem>
                 <SelectItem value="in-progress">In Progress</SelectItem>
@@ -632,7 +632,7 @@ function DashboardOverview({
               <SelectTrigger>
                 <SelectValue placeholder="Type" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white">
                 <SelectItem value="all">All Types</SelectItem>
                 <SelectItem value="Floor Plan Analysis">Floor Plan</SelectItem>
                 <SelectItem value="Energy Flow Analysis">
@@ -648,7 +648,7 @@ function DashboardOverview({
               <SelectTrigger>
                 <SelectValue placeholder="Date Range" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white">
                 <SelectItem value="all">All Time</SelectItem>
                 <SelectItem value="today">Today</SelectItem>
                 <SelectItem value="week">This Week</SelectItem>
