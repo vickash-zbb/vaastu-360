@@ -1,0 +1,187 @@
+/** @import must precede all other statements */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons+Outlined");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Tailwind CSS theme
+   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
+   * A different format will require also updating the theme in tailwind.config.ts.
+  */
+  :root {
+    /* Vaastu 360 Brand Colors */
+    --background: 318 75% 98%;
+    --foreground: 0 0% 0%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+
+    /* Primary: Dark purple/maroon #421034 */
+    --primary: 318 61% 16%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary: Light purple #F7EEF9 */
+    --secondary: 318 47% 94%;
+    --secondary-foreground: 318 61% 16%;
+
+    --muted: 318 47% 94%;
+    --muted-foreground: 0 0% 35%;
+
+    --accent: 318 47% 94%;
+    --accent-foreground: 318 61% 16%;
+
+    /* Success green for checkmarks */
+    --success: 120 99% 35%;
+    --success-foreground: 0 0% 100%;
+
+    --destructive: 0 76% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 318 20% 88%;
+    --input: 318 20% 88%;
+    --ring: 318 61% 16%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar tokens aligned to brand */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 0%;
+    --sidebar-primary: 318 61% 16%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 318 47% 94%;
+    --sidebar-accent-foreground: 318 61% 16%;
+    --sidebar-border: 318 20% 88%;
+    --sidebar-ring: 318 61% 16%;
+  }
+
+  .dark {
+    --background: 318 61% 8%;
+    --foreground: 0 0% 98%;
+
+    --card: 318 61% 10%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 318 61% 10%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 318 70% 85%;
+    --primary-foreground: 318 61% 16%;
+
+    --secondary: 318 30% 15%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 318 30% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 318 30% 15%;
+    --accent-foreground: 0 0% 98%;
+
+    --success: 120 80% 50%;
+    --success-foreground: 0 0% 0%;
+
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 318 30% 18%;
+    --input: 318 30% 18%;
+    --ring: 318 70% 85%;
+
+    --sidebar-background: 318 61% 10%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 318 70% 85%;
+    --sidebar-primary-foreground: 318 61% 16%;
+    --sidebar-accent: 318 30% 15%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 318 30% 18%;
+    --sidebar-ring: 318 70% 85%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family:
+      "Roboto",
+      -apple-system,
+      system-ui,
+      sans-serif;
+  }
+}
+
+/* Custom utility classes for Vaastu 360 */
+@layer utilities {
+  .text-muted {
+    color: hsl(0 0% 35%);
+  }
+
+  .text-gray-600 {
+    color: hsl(0 0% 35%);
+  }
+
+  .text-gray-500 {
+    color: hsl(0 0% 43%);
+  }
+
+  .bg-success {
+    background-color: hsl(var(--success));
+  }
+
+  .text-success-foreground {
+    color: hsl(var(--success-foreground));
+  }
+
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom animations */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 5px rgba(66, 16, 52, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(66, 16, 52, 0.4), 0 0 30px rgba(66, 16, 52, 0.2); }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite;
+  }
+
+  /* Button hover effects */
+  .btn-hover-lift {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(66, 16, 52, 0.15);
+  }
+
+  /* Card hover effects */
+  .card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(66, 16, 52, 0.1);
+  }
+}

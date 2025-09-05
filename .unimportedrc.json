@@ -1,0 +1,4 @@
+{
+  "entry": ["client/App.tsx", "server/index.ts"],
+  "extensions": [".ts", ".tsx", ".js", ".jsx"]
+}
