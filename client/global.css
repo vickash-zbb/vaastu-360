@@ -1,3 +1,14 @@
+/**
+ * Vaastu 360 Theme Configuration
+ *
+ * To change the entire site's color scheme:
+ * 1. Modify --brand-primary-hue, --brand-primary-saturation, --brand-primary-lightness
+ * 2. Adjust --brand-secondary-hue, --brand-secondary-saturation, --brand-secondary-lightness
+ * 3. For typography, update --font-family-primary and font size variables
+ *
+ * Example: To change to blue theme, set --brand-primary-hue: 210;
+ */
+
 /** @import must precede all other statements */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons+Outlined");
@@ -7,15 +18,36 @@
 @tailwind utilities;
 
 @layer base {
-  /**
-   * Tailwind CSS theme
-   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
-   * A different format will require also updating the theme in tailwind.config.ts.
-  */
-  :root {
-    /* Vaastu 360 Brand Colors */
-    --background: 318 75% 98%;
-    --foreground: 0 0% 0%;
+ /**
+  * Tailwind CSS theme
+  * tailwind.config.ts expects the following color variables to be expressed as HSL values.
+  * A different format will require also updating the theme in tailwind.config.ts.
+ */
+ :root {
+   /* Centralized Brand Variables - Change these to update entire site */
+   --brand-primary-hue: 318;
+   --brand-primary-saturation: 61%;
+   --brand-primary-lightness: 16%;
+   --brand-secondary-hue: 318;
+   --brand-secondary-saturation: 47%;
+   --brand-secondary-lightness: 94%;
+
+   /* Typography Variables */
+   --font-family-primary: "Roboto", -apple-system, system-ui, sans-serif;
+   --font-size-base: 1rem;
+   --font-size-lg: 1.125rem;
+   --font-size-xl: 1.25rem;
+   --font-size-2xl: 1.5rem;
+   --font-size-3xl: 1.875rem;
+   --font-size-4xl: 2.25rem;
+   --font-weight-normal: 400;
+   --font-weight-medium: 500;
+   --font-weight-bold: 700;
+   --line-height-base: 1.5;
+
+   /* Vaastu 360 Brand Colors */
+   --background: var(--brand-secondary-hue) 75% 98%;
+   --foreground: 0 0% 0%;
 
     --card: 0 0% 100%;
     --card-foreground: 0 0% 0%;
@@ -24,12 +56,12 @@
     --popover-foreground: 0 0% 0%;
 
     /* Primary: Dark purple/maroon #421034 */
-    --primary: 318 61% 16%;
+    --primary: var(--brand-primary-hue) var(--brand-primary-saturation) var(--brand-primary-lightness);
     --primary-foreground: 0 0% 100%;
 
     /* Secondary: Light purple #F7EEF9 */
-    --secondary: 318 47% 94%;
-    --secondary-foreground: 318 61% 16%;
+    --secondary: var(--brand-secondary-hue) var(--brand-secondary-saturation) var(--brand-secondary-lightness);
+    --secondary-foreground: var(--brand-primary-hue) var(--brand-primary-saturation) var(--brand-primary-lightness);
 
     --muted: 318 47% 94%;
     --muted-foreground: 0 0% 35%;
@@ -62,17 +94,17 @@
   }
 
   .dark {
-    --background: 318 61% 8%;
+    --background: var(--brand-primary-hue) var(--brand-primary-saturation) 8%;
     --foreground: 0 0% 98%;
 
-    --card: 318 61% 10%;
+    --card: var(--brand-primary-hue) var(--brand-primary-saturation) 10%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 318 61% 10%;
+    --popover: var(--brand-primary-hue) var(--brand-primary-saturation) 10%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 318 70% 85%;
-    --primary-foreground: 318 61% 16%;
+    --primary: var(--brand-primary-hue) 70% 85%;
+    --primary-foreground: var(--brand-primary-hue) var(--brand-primary-saturation) var(--brand-primary-lightness);
 
     --secondary: 318 30% 15%;
     --secondary-foreground: 0 0% 98%;
@@ -111,11 +143,9 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family:
-      "Roboto",
-      -apple-system,
-      system-ui,
-      sans-serif;
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
   }
 }
 
