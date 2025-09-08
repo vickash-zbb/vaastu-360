@@ -203,9 +203,9 @@ export default function UserProfile() {
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="profile">Profile</TabsTrigger>
-          <TabsTrigger value="preferences">Preferences</TabsTrigger>
-          <TabsTrigger value="security">Security</TabsTrigger>
+          <TabsTrigger value="profile" className="data-[state=active]:text-white">Profile</TabsTrigger>
+          <TabsTrigger value="preferences" className="data-[state=active]:text-white">Preferences</TabsTrigger>
+          <TabsTrigger value="security" className="data-[state=active]:text-white">Security</TabsTrigger>
         </TabsList>
 
         {/* Profile Tab */}
