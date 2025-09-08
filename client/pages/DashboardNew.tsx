@@ -71,14 +71,11 @@ import EnergyMap from "@/components/dashboard/EnergyMap";
 import Support from "@/components/dashboard/Support";
 import UserProfile from "@/components/dashboard/UserProfile";
 import UserManagement from "@/components/dashboard/UserManagement";
-import GoogleStyleUpload from "@/components/dashboard/GoogleStyleUpload";
 import Vaastu360Upload from "@/components/dashboard/Vaastu360Upload";
 
 type DashboardSection =
   | "overview"
   | "new-analysis"
-  | "google-upload"
-  | "floor-plans"
   | "vastu-report"
   | "energy-map"
   | "support"
@@ -90,8 +87,6 @@ type DashboardSection =
 const menuItems = [
   { id: "overview" as const, label: "Dashboard Overview", icon: Home },
   { id: "new-analysis" as const, label: "New Analysis", icon: Plus },
-  { id: "google-upload" as const, label: "Google Style Upload", icon: Upload },
-  { id: "floor-plans" as const, label: "Floor Plans", icon: FileText },
   { id: "vastu-report" as const, label: "Vastu Compliance", icon: FileText },
   { id: "energy-map" as const, label: "Energy Flow Map", icon: Map },
   { id: "support" as const, label: "Support", icon: HelpCircle },
@@ -244,10 +239,6 @@ export default function Dashboard() {
       case "overview":
         return <DashboardOverview setActiveSection={setActiveSection} />;
       case "new-analysis":
-        return <Vaastu360Upload />;
-      case "google-upload":
-        return <GoogleStyleUpload />;
-      case "floor-plans":
         return <Vaastu360Upload />;
       case "vastu-report":
         return <VastuReport />;
@@ -459,13 +450,6 @@ function DashboardOverview({
       icon: Plus,
       action: () => setActiveSection("new-analysis"),
       color: "bg-blue-500 hover:bg-blue-600",
-    },
-    {
-      title: "Upload Floor Plan",
-      description: "Upload and analyze floor plans",
-      icon: Upload,
-      action: () => setActiveSection("floor-plans"),
-      color: "bg-green-500 hover:bg-green-600",
     },
     {
       title: "View Reports",
