@@ -1840,59 +1840,72 @@ function SubscriptionHistory() {
 // Subscription Upgrade Component
 function SubscriptionUpgrade() {
   const currentPlan = {
-    name: "Premium Plan",
-    price: 29.99,
+    name: "Gold Plan",
+    price: 99,
     features: [
-      "Unlimited property analyses",
-      "Advanced Vastu reports",
-      "Energy flow mapping",
-      "Priority support",
-      "API access",
+      "Complete Vastu Analysis Suite",
+      "Advanced Energy Flow Visualization",
+      "Custom Remedial Strategies",
+      "24/7 Priority Support",
+      "Bulk Property Analysis",
     ],
   };
 
   const availablePlans = [
     {
-      id: "basic",
-      name: "Basic Plan",
-      price: 19.99,
-      period: "month",
+      id: "bronze",
+      name: "Bronze Plan",
+      price: 0,
+      period: "1 Week Free",
       features: [
-        "Up to 10 property analyses",
-        "Basic Vastu reports",
-        "Standard support",
-        "Email notifications",
+        "Comprehensive Vastu Compliance Report",
+        "Energy Flow Analysis",
+        "Personalized Recommendations",
       ],
       popular: false,
       current: false,
     },
     {
-      id: "premium",
-      name: "Premium Plan",
-      price: 29.99,
-      period: "month",
+      id: "silver",
+      name: "Silver Plan",
+      price: 45,
+      period: "1 Week",
       features: [
-        "Unlimited property analyses",
-        "Advanced Vastu reports",
-        "Energy flow mapping",
-        "Priority support",
-        "API access",
+        "Advanced Vastu Compliance Report",
+        "Detailed Energy Flow Mapping",
+        "Remedial Solutions",
+        "Priority Email Support",
+      ],
+      popular: false,
+      current: false,
+    },
+    {
+      id: "gold",
+      name: "Gold Plan",
+      price: 99,
+      period: "1 month",
+      features: [
+        "Complete Vastu Analysis Suite",
+        "Advanced Energy Flow Visualization",
+        "Custom Remedial Strategies",
+        "24/7 Priority Support",
+        "Bulk Property Analysis",
       ],
       popular: true,
       current: true,
     },
     {
-      id: "enterprise",
-      name: "Enterprise Plan",
-      price: 49.99,
-      period: "month",
+      id: "platinum",
+      name: "Platinum Plan",
+      price: 299,
+      period: "2 month",
       features: [
-        "Everything in Premium",
-        "White-label reports",
-        "Dedicated account manager",
-        "Custom integrations",
-        "Advanced analytics",
-        "Phone support",
+        "Enterprise Vastu Intelligence Platform",
+        "AI-Powered Remedial Design",
+        "White-Label Reporting",
+        "Dedicated Success Manager",
+        "API Integration",
+        "Advanced Analytics Dashboard",
       ],
       popular: false,
       current: false,
@@ -1957,10 +1970,16 @@ function SubscriptionUpgrade() {
             <CardHeader className="text-center">
               <CardTitle className="text-xl">{plan.name}</CardTitle>
               <div className="text-3xl font-bold">
-                ${plan.price}
-                <span className="text-sm font-normal text-muted-foreground">
-                  /{plan.period}
-                </span>
+                {plan.price === 0 ? (
+                  <span className="text-green-600">FREE</span>
+                ) : (
+                  <>
+                    ${plan.price}
+                    <span className="text-sm font-normal text-muted-foreground">
+                      /{plan.period}
+                    </span>
+                  </>
+                )}
               </div>
             </CardHeader>
             <CardContent>
@@ -1976,7 +1995,11 @@ function SubscriptionUpgrade() {
                 className={`w-full mt-6 ${plan.current ? "bg-gray-100 text-gray-500 hover:bg-gray-100" : "bg-blue-600 hover:bg-blue-700"}`}
                 disabled={plan.current}
               >
-                {plan.current ? "Current Plan" : "Upgrade Now"}
+                {plan.current
+                  ? "✓ Current Plan"
+                  : plan.price === 0
+                    ? "Start Free Trial"
+                    : "Upgrade Now"}
               </Button>
             </CardContent>
           </Card>
