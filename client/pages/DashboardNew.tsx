@@ -42,7 +42,6 @@ import {
   BarChart3,
   HelpCircle,
   User,
-  Users,
   LogOut,
   Plus,
   Play,
@@ -70,7 +69,6 @@ import VastuReport from "@/components/dashboard/VastuReport";
 import EnergyMap from "@/components/dashboard/EnergyMap";
 import Support from "@/components/dashboard/Support";
 import UserProfile from "@/components/dashboard/UserProfile";
-import UserManagement from "@/components/dashboard/UserManagement";
 import Vaastu360Upload from "@/components/dashboard/Vaastu360Upload";
 
 type DashboardSection =
@@ -80,7 +78,6 @@ type DashboardSection =
   | "energy-map"
   | "support"
   | "profile"
-  | "user-management"
   | "subscription-history"
   | "subscription-upgrade";
 
@@ -91,7 +88,6 @@ const menuItems = [
   { id: "energy-map" as const, label: "Energy Flow Map", icon: Map },
   { id: "support" as const, label: "Support", icon: HelpCircle },
   { id: "profile" as const, label: "Profile", icon: User },
-  { id: "user-management" as const, label: "User Management", icon: Users },
   {
     id: "subscription-history" as const,
     label: "Subscription History",
@@ -248,8 +244,6 @@ export default function Dashboard() {
         return <Support />;
       case "profile":
         return <UserProfile />;
-      case "user-management":
-        return <UserManagement />;
       case "subscription-history":
         return <SubscriptionHistory />;
       case "subscription-upgrade":
@@ -526,7 +520,7 @@ function DashboardOverview({
             <h3 className="tracking-tight text-xs sm:text-sm font-medium">
               Active Users
             </h3>
-            <Users className="h-4 w-4 text-muted-foreground" />
+            <User className="h-4 w-4 text-muted-foreground" />
           </div>
           <div className="text-xl sm:text-2xl font-bold">24</div>
           <p className="text-xs text-muted-foreground flex items-center">
