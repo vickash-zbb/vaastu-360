@@ -23,6 +23,7 @@ import {
   X,
   Play,
 } from "lucide-react";
+import { NavigateFunction } from "react-router-dom";
 
 type DashboardSection =
   | "overview"
@@ -36,10 +37,12 @@ type DashboardSection =
 
 interface DashboardOverviewProps {
   setActiveSection: (section: DashboardSection) => void;
+  navigate: NavigateFunction;
 }
 
 export default function DashboardOverview({
   setActiveSection,
+  navigate,
 }: DashboardOverviewProps) {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [statusFilter, setStatusFilter] = React.useState<string>("all");
@@ -393,10 +396,18 @@ export default function DashboardOverview({
                 <Button
                   size="sm"
                   variant="outline"
-                  onClick={() => setActiveSection("vastu-report")}
+                  onClick={() =>
+                    navigate("/report", {
+                      state: {
+                        propertyName: analysis.propertyName,
+                        address: analysis.propertyName,
+                        files: [],
+                      },
+                    })
+                  }
                   className="flex-1 sm:flex-none"
                 >
-                  View Report
+                  View Details
                 </Button>
                 {analysis.status === "in-progress" && (
                   <Button

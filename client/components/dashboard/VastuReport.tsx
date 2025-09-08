@@ -1,9 +1,22 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { CheckCircle, XCircle, AlertTriangle, Download, Eye } from "lucide-react";
+import {
+  CheckCircle,
+  XCircle,
+  AlertTriangle,
+  Download,
+  Eye,
+} from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface VastuReport {
   id: string;
@@ -21,6 +34,18 @@ interface VastuReport {
   }>;
 }
 
+// Shared interface for analysis data passed between components
+export interface AnalysisData {
+  propertyName?: string;
+  address?: string;
+  files: Array<{
+    file: File;
+    id: string;
+    scale?: string;
+    detectionAccuracy?: "auto" | "manual";
+  }>;
+}
+
 const mockReports: VastuReport[] = [
   {
     id: "1",
@@ -31,16 +56,16 @@ const mockReports: VastuReport[] = [
     status: "compliant",
     recommendations: [
       "Consider adding water element in the northeast corner",
-      "Main entrance alignment is optimal"
+      "Main entrance alignment is optimal",
     ],
     issues: [
       {
         category: "Direction",
         severity: "low",
         description: "Minor misalignment in bedroom orientation",
-        suggestion: "Adjust bed position to align with magnetic north"
-      }
-    ]
+        suggestion: "Adjust bed position to align with magnetic north",
+      },
+    ],
   },
   {
     id: "2",
@@ -51,49 +76,62 @@ const mockReports: VastuReport[] = [
     status: "non-compliant",
     recommendations: [
       "Major restructuring required for Vastu compliance",
-      "Consider professional Vastu consultant"
+      "Consider professional Vastu consultant",
     ],
     issues: [
       {
         category: "Structure",
         severity: "high",
         description: "Main entrance faces negative direction",
-        suggestion: "Relocate main entrance to northeast or east"
+        suggestion: "Relocate main entrance to northeast or east",
       },
       {
         category: "Elements",
         severity: "high",
         description: "Fire element dominates water element placement",
-        suggestion: "Balance elements according to Vastu principles"
+        suggestion: "Balance elements according to Vastu principles",
       },
       {
         category: "Rooms",
         severity: "medium",
         description: "Master bedroom in southwest corner",
-        suggestion: "Consider relocating master bedroom to southwest"
-      }
-    ]
-  }
+        suggestion: "Consider relocating master bedroom to southwest",
+      },
+    ],
+  },
 ];
 
 const statusConfig = {
   compliant: { color: "bg-green-100 text-green-800", icon: CheckCircle },
   partial: { color: "bg-yellow-100 text-yellow-800", icon: AlertTriangle },
-  "non-compliant": { color: "bg-red-100 text-red-800", icon: XCircle }
+  "non-compliant": { color: "bg-red-100 text-red-800", icon: XCircle },
 };
 
 const severityColors = {
   high: "text-red-600",
   medium: "text-yellow-600",
-  low: "text-green-600"
+  low: "text-green-600",
 };
 
 export default function VastuReport() {
+  const navigate = useNavigate();
+
+  const handleViewDetails = (report: VastuReport) => {
+    const analysisData = {
+      propertyName: report.propertyName,
+      address: report.propertyName,
+      files: [],
+    };
+    navigate("/report", { state: analysisData });
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">Vastu Compliance Reports</h2>
+          <h2 className="text-2xl font-bold tracking-tight">
+            Vastu Compliance Reports
+          </h2>
           <p className="text-muted-foreground">
             Detailed analysis of property Vastu compliance and recommendations
           </p>
@@ -114,7 +152,9 @@ export default function VastuReport() {
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
-                    <CardTitle className="text-xl">{report.propertyName}</CardTitle>
+                    <CardTitle className="text-xl">
+                      {report.propertyName}
+                    </CardTitle>
                     <CardDescription>{report.floorPlan}</CardDescription>
                   </div>
                   <Badge className={statusInfo.color}>
@@ -125,7 +165,9 @@ export default function VastuReport() {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-sm">
                     <span>Overall Vastu Score</span>
-                    <span className="font-semibold">{report.overallScore}/100</span>
+                    <span className="font-semibold">
+                      {report.overallScore}/100
+                    </span>
                   </div>
                   <Progress value={report.overallScore} className="h-2" />
                 </div>
@@ -137,10 +179,14 @@ export default function VastuReport() {
                     <div className="space-y-3">
                       {report.issues.map((issue, index) => (
                         <Alert key={index}>
-                          <AlertTriangle className={`h-4 w-4 ${severityColors[issue.severity]}`} />
+                          <AlertTriangle
+                            className={`h-4 w-4 ${severityColors[issue.severity]}`}
+                          />
                           <AlertDescription>
                             <div className="font-medium">{issue.category}</div>
-                            <div className="text-sm mt-1">{issue.description}</div>
+                            <div className="text-sm mt-1">
+                              {issue.description}
+                            </div>
                             <div className="text-sm text-muted-foreground mt-1">
                               <strong>Suggestion:</strong> {issue.suggestion}
                             </div>
@@ -168,7 +214,11 @@ export default function VastuReport() {
                     Generated on {report.generatedDate}
                   </span>
                   <div className="flex space-x-2">
-                    <Button variant="outline" size="sm">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleViewDetails(report)}
+                    >
                       <Eye className="mr-1 h-3 w-3" />
                       View Details
                     </Button>

@@ -231,13 +231,19 @@ function LocationPicker({
 }
 
 export default function Dashboard() {
+  const navigate = useNavigate();
   const [activeSection, setActiveSection] =
     useState<DashboardSection>("overview");
 
   const renderContent = () => {
     switch (activeSection) {
       case "overview":
-        return <DashboardOverview setActiveSection={setActiveSection} />;
+        return (
+          <DashboardOverview
+            setActiveSection={setActiveSection}
+            navigate={navigate}
+          />
+        );
       case "new-analysis":
         return <NewAnalysis />;
       case "vastu-report":
