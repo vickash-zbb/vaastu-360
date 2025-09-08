@@ -449,21 +449,21 @@ function DashboardOverview({
       description: "Start a new property analysis",
       icon: Plus,
       action: () => setActiveSection("new-analysis"),
-      color: "bg-blue-500 hover:bg-blue-600",
+      color: "bg-primary hover:bg-primary/90",
     },
     {
       title: "View Reports",
       description: "Check your analysis reports",
       icon: FileText,
       action: () => setActiveSection("vastu-report"),
-      color: "bg-purple-500 hover:bg-purple-600",
+      color: "bg-secondary hover:bg-secondary/90",
     },
     {
       title: "Energy Analysis",
       description: "Analyze energy flow patterns",
       icon: Zap,
       action: () => setActiveSection("energy-map"),
-      color: "bg-orange-500 hover:bg-orange-600",
+      color: "bg-success hover:bg-success/90",
     },
   ];
 
@@ -483,7 +483,7 @@ function DashboardOverview({
           <div className="flex space-x-3">
             <Button
               onClick={() => setActiveSection("new-analysis")}
-              className="bg-blue-600 hover:bg-blue-700"
+              variant="primary"
             >
               <Plus className="mr-2 h-4 w-4" />
               New Analysis
@@ -698,7 +698,8 @@ function DashboardOverview({
                 {analysis.status === "in-progress" && (
                   <Button
                     size="sm"
-                    className="bg-blue-600 hover:bg-blue-700 flex-1 sm:flex-none"
+                    variant="primary"
+                    className="flex-1 sm:flex-none"
                   >
                     <Play className="mr-1 h-3 w-3" />
                     Continue
@@ -1177,7 +1178,8 @@ function NewAnalysis() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               onClick={() => fileInputRef.current?.click()}
-              className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 text-lg font-medium"
+              variant="secondary"
+              className="text-white px-8 py-3 text-lg font-medium"
             >
               <Upload className="w-5 h-5 mr-2" />
               Upload Files
@@ -1185,7 +1187,7 @@ function NewAnalysis() {
             <Button
               onClick={handleCameraUpload}
               variant="outline"
-              className="border-purple-200 text-purple-600 hover:bg-purple-50 px-8 py-3 text-lg font-medium"
+              className="px-8 py-3 text-lg font-medium border-secondary text-secondary hover:bg-secondary/10"
             >
               📷 Take Photo
             </Button>
@@ -1219,7 +1221,8 @@ function NewAnalysis() {
               </div>
               <Button
                 onClick={() => fileInputRef.current?.click()}
-                className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2"
+                variant="secondary"
+                className="text-white px-6 py-2"
               >
                 Choose File
               </Button>

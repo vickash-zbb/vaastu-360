@@ -45,39 +45,39 @@
    --line-height-base: 1.5;
 
    /* Vaastu 360 Brand Colors */
-   --background: var(--brand-background);
-   --foreground: var(--brand-foreground);
+   --background: 274 86% 11%;
+   --foreground: 0 0% 0%;
 
-   --card: #ffffff;
-   --card-foreground: var(--brand-foreground);
+   --card: 0 0% 100%;
+   --card-foreground: 0 0% 0%;
 
-   --popover: #ffffff;
-   --popover-foreground: var(--brand-foreground);
+   --popover: 0 0% 100%;
+   --popover-foreground: 0 0% 0%;
 
    /* Primary: Dark purple/maroon */
-   --primary: var(--brand-primary);
-   --primary-foreground: #ffffff;
+   --primary: 318 61% 16%;
+   --primary-foreground: 0 0% 100%;
 
    /* Secondary: Light purple */
-   --secondary: var(--brand-secondary);
-   --secondary-foreground: var(--brand-primary);
+   --secondary: 289 96% 28%;
+   --secondary-foreground: 0 0% 100%;
 
-    --muted: var(--brand-secondary);
-    --muted-foreground: #555555;
+    --muted: 318 47% 94%;
+    --muted-foreground: 0 0% 35%;
 
-    --accent: var(--brand-secondary);
-    --accent-foreground: var(--brand-primary);
+    --accent: 318 47% 94%;
+    --accent-foreground: 318 61% 16%;
 
     /* Success green for checkmarks */
-    --success: #22c55e;
-    --success-foreground: #ffffff;
+    --success: 142 72% 41%;
+    --success-foreground: 0 0% 100%;
 
-    --destructive: #dc2626;
-    --destructive-foreground: #ffffff;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: #c4c6cc;
-    --input: #e5e7eb;
-    --ring: var(--brand-primary);
+    --border: 225 7% 78%;
+    --input: 220 14% 91%;
+    --ring: 318 61% 16%;
 
     --radius: 0.75rem;
 
@@ -218,4 +218,8 @@ body{
   .border{
     border-color: rgb(223, 223, 223) !important;
   }
+  
 }
+.bg-background{
+    background: white;
+  }

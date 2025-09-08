@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import type { GSAPTimeline } from 'gsap';
 
 const MotionGifAnimation: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
