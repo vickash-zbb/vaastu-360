@@ -13,88 +13,89 @@ import { CheckCircle } from "lucide-react";
 
 export default function SubscriptionUpgrade() {
   const currentPlan = {
-    name: "Gold Plan",
-    price: 99,
-    features: [
-      "Complete Vastu Analysis Suite",
-      "Advanced Energy Flow Visualization",
-      "Custom Remedial Strategies",
-      "24/7 Priority Support",
-      "Bulk Property Analysis",
-    ],
+    name: "Bronze",
+    price: "₹0",
+    period: "1 Week Free",
+    description: "Perfect for small spaces",
+    highlights: {
+      sft: "< 1000",
+      floors: "1",
+      properties: "1",
+    },
+    features: ["Vastu Compliance Report"],
+    cta: "Start Free",
+    popular: false,
+    badge: "Free",
   };
 
   const availablePlans = [
     {
-      id: "bronze",
-      name: "Bronze Plan",
-      price: 0,
+      name: "Bronze",
+      price: "₹0",
       period: "1 Week Free",
-      features: [
-        "Up to 1,000 sq ft properties",
-        "1 Level analysis",
-        "1 Property analysis",
-        "Vastu Compliance Report",
-        "Remedies for Vastu Dosh",
-      ],
+      description: "Perfect for small spaces",
+      highlights: {
+        sft: "< 1000",
+        floors: "1",
+        properties: "1",
+      },
+      features: ["Vastu Compliance Report"],
+      cta: "Start Free",
       popular: false,
-      current: false,
+      badge: "Free",
     },
     {
-      id: "silver",
-      name: "Silver Plan",
-      price: 45,
+      name: "Silver",
+      price: "$45",
       period: "1 Week",
-      features: [
-        "Over 1,000 sq ft properties",
-        "3 Levels analysis",
-        "1 Property analysis",
-        "Vastu Compliance Report",
-        "Remedies for Vastu Dosh",
-        "Priority Email Support",
-      ],
+      description: "For standard properties",
+      highlights: {
+        sft: "> 1000",
+        floors: "3",
+        properties: "1",
+      },
+      features: ["Vastu Compliance Report"],
+      cta: "Join Now",
       popular: false,
-      current: false,
+      badge: null,
     },
     {
-      id: "gold",
-      name: "Gold Plan",
-      price: 99,
-      period: "1 Month",
-      features: [
-        "Over 1,000 sq ft properties",
-        "3 Levels analysis",
-        "3 Properties analysis",
-        "Vastu Compliance Report",
-        "Remedies for Vastu Dosh",
-        "24/7 Priority Support",
-        "Bulk Property Analysis",
-      ],
+      name: "Gold",
+      price: "$99",
+      period: "1 month",
+      description: "Best value for multiple properties",
+      highlights: {
+        sft: "> 1000",
+        floors: "3",
+        properties: "3",
+      },
+      features: ["Vastu Compliance Report"],
+      cta: "Join Now",
       popular: true,
-      current: true,
+      badge: "Most Popular",
     },
     {
-      id: "platinum",
-      name: "Platinum Plan",
-      price: 299,
-      period: "2 Months",
-      features: [
-        "Over 1,000 sq ft properties",
-        "10 Levels analysis",
-        "10 Properties analysis",
-        "Vastu Compliance Report",
-        "Remedies for Vastu Dosh",
-        "Enterprise Vastu Intelligence Platform",
-        "AI-Powered Remedial Design",
-        "White-Label Reporting",
-        "Dedicated Success Manager",
-        "API Integration",
-        "Advanced Analytics Dashboard",
-      ],
+      name: "Platinum",
+      price: "$299",
+      period: "2 month",
+      description: "Premium with full remedies",
+      highlights: {
+        sft: "> 1000",
+        floors: "3",
+        properties: "10",
+      },
+      features: ["Vastu Compliance Report", "Remedies for Vastu Dosha"],
+      cta: "Join Now",
       popular: false,
-      current: false,
+      badge: "Premium",
     },
   ];
+
+  const handlePlanSelect = (plan: any) => {
+    // Handle plan selection: integrate with your payment/checkout flow or update component state
+    // For now, log the selected plan (replace with real behavior as needed)
+    console.log("Selected plan:", plan);
+  };
 
   return (
     <div className="space-y-6">
@@ -110,83 +111,131 @@ export default function SubscriptionUpgrade() {
       </div>
 
       {/* Current Plan */}
-      <Card className="border-blue-200 bg-blue-50/50">
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div>
-              <CardTitle className="text-lg">
-                Current Plan: {currentPlan.name}
-              </CardTitle>
-              <CardDescription>${currentPlan.price}/month</CardDescription>
-            </div>
-            <Badge className="bg-blue-100 text-blue-800">Active</Badge>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-2">
-            {currentPlan.features.map((feature, index) => (
-              <div key={index} className="flex items-center space-x-2">
-                <CheckCircle className="h-4 w-4 text-green-600" />
-                <span className="text-sm">{feature}</span>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Available Plans */}
-      <div className="grid gap-6 md:grid-cols-3">
-        {availablePlans.map((plan) => (
-          <Card
-            key={plan.id}
-            className={`relative ${plan.popular ? "border-blue-500 shadow-lg" : ""} ${plan.current ? "border-green-500" : ""}`}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        {availablePlans.map((plan, index) => (
+          <div
+            key={index}
+            className={`pricing-card relative bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${
+              plan.popular ? "ring-2 ring-[#421034] shadow-lg" : ""
+            }`}
           >
-            {plan.popular && (
-              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                <Badge className="bg-blue-500 text-white">Most Popular</Badge>
+            {plan.badge && (
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <span className="px-4 py-2 rounded-full text-sm font-semibold bg-[#421034] text-white">
+                  {plan.badge}
+                </span>
               </div>
             )}
-            {plan.current && (
-              <div className="absolute -top-3 right-4">
-                <Badge className="bg-green-500 text-white">Current</Badge>
+
+            <div className="p-8">
+              {/* Header */}
+              <div className="text-center mb-6">
+                <h3 className="text-xl font-bold text-[#421034] mb-2">
+                  {plan.name}
+                </h3>
+                <div className="flex items-baseline justify-center mb-4">
+                  <span className="text-4xl font-bold text-[#421034]">
+                    {plan.price}
+                  </span>
+                  <span className="text-gray-600 ml-2">
+                    {plan.period !== "Free" ? `/${plan.period}` : plan.period}
+                  </span>
+                </div>
+                <p className="text-gray-600 text-sm">{plan.description}</p>
               </div>
-            )}
-            <CardHeader className="text-center">
-              <CardTitle className="text-xl">{plan.name}</CardTitle>
-              <div className="text-3xl font-bold">
-                {plan.price === 0 ? (
-                  <span className="text-green-600">FREE</span>
-                ) : (
-                  <>
-                    ${plan.price}
-                    <span className="text-sm font-normal text-muted-foreground">
-                      /{plan.period}
+
+              {/* Highlights Row */}
+              <div className="mb-6 py-3 px-4 bg-gray-50 rounded-lg">
+                <div className="flex items-center justify-between border-b border-gray-200 pb-2 mb-2">
+                  <div className="flex items-center">
+                    <span className="material-icons-outlined text-[#421034] mr-2 text-lg">
+                      straighten
                     </span>
-                  </>
-                )}
+                    <span className="text-xs text-gray-500 uppercase tracking-wide">
+                      SFT
+                    </span>
+                  </div>
+                  <span className="text-sm font-medium text-[#421034]">
+                    {plan.highlights.sft}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between border-b border-gray-200 pb-2 mb-2">
+                  <div className="flex items-center">
+                    <span className="material-icons-outlined text-[#421034] mr-2 text-lg">
+                      apartment
+                    </span>
+                    <span className="text-xs text-gray-500 uppercase tracking-wide">
+                      Floors
+                    </span>
+                  </div>
+                  <span className="text-sm font-medium text-[#421034]">
+                    {plan.highlights.floors}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <span className="material-icons-outlined text-[#421034] mr-2 text-lg">
+                      home_work
+                    </span>
+                    <span className="text-xs text-gray-500 uppercase tracking-wide">
+                      Properties
+                    </span>
+                  </div>
+                  <span className="text-sm font-medium text-[#421034]">
+                    {plan.highlights.properties}
+                  </span>
+                </div>
               </div>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-2">
-                {plan.features.map((feature, index) => (
-                  <li key={index} className="flex items-center space-x-2">
-                    <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
-                    <span className="text-sm">{feature}</span>
+
+              {/* Features */}
+              <ul className="space-y-2 mb-8">
+                {plan.features.map((feature, featureIndex) => (
+                  <li key={featureIndex} className="flex items-center">
+                    {feature.includes("✘") ? (
+                      <span className="material-icons-outlined text-[#9E9E9E] mr-3 text-lg">
+                        cancel
+                      </span>
+                    ) : (
+                      <span className="material-icons-outlined text-[#4CAF50] mr-3 text-lg">
+                        check_circle
+                      </span>
+                    )}
+                    <span className="text-gray-700 text-base font-medium">
+                      {feature.replace(": ✘", "").replace(": ✔", "")}
+                    </span>
                   </li>
                 ))}
               </ul>
+
+              {/* CTA */}
               <Button
-                className={`w-full mt-6 ${plan.current ? "bg-gray-100 text-gray-500 hover:bg-gray-100" : "bg-blue-600 hover:bg-blue-700"}`}
-                disabled={plan.current}
+                className={`w-full py-3 px-6 text-base font-semibold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg ${
+                  plan.name === "Bronze"
+                    ? "bg-[#421034] hover:bg-[#2E0824] text-white border-0 hover:shadow-xl"
+                    : "border-2 border-[#421034] text-[#421034] hover:bg-[#421034] hover:text-white bg-transparent hover:shadow-lg"
+                }`}
+                style={{
+                  color: plan.name === "Bronze" ? "white" : "#421034",
+                  borderColor: "#421034",
+                }}
+                onMouseEnter={(e) => {
+                  if (plan.name !== "Bronze") {
+                    e.currentTarget.style.color = "white";
+                    e.currentTarget.style.backgroundColor = "#421034";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (plan.name !== "Bronze") {
+                    e.currentTarget.style.color = "#421034";
+                    e.currentTarget.style.backgroundColor = "transparent";
+                  }
+                }}
+                onClick={() => handlePlanSelect(plan)}
               >
-                {plan.current
-                  ? "✓ Current Plan"
-                  : plan.price === 0
-                    ? "Start Free Trial"
-                    : "Upgrade Now"}
+                {plan.cta}
               </Button>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         ))}
       </div>
 
