@@ -9,25 +9,9 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, Home, Building, MapPin } from "lucide-react";
 
 export default function SubscriptionUpgrade() {
-  const currentPlan = {
-    name: "Bronze",
-    price: "₹0",
-    period: "1 Week Free",
-    description: "Perfect for small spaces",
-    highlights: {
-      sft: "< 1000",
-      floors: "1",
-      properties: "1",
-    },
-    features: ["Vastu Compliance Report"],
-    cta: "Start Free",
-    popular: false,
-    badge: "Free",
-  };
-
   const availablePlans = [
     {
       name: "Bronze",
@@ -40,13 +24,14 @@ export default function SubscriptionUpgrade() {
         properties: "1",
       },
       features: ["Vastu Compliance Report"],
-      cta: "Start Free",
+      cta: "Current",
       popular: false,
-      badge: "Free",
+      badge: "Current Plan",
+      isCurrent: true,
     },
     {
       name: "Silver",
-      price: "$45",
+      price: "₹45",
       period: "1 Week",
       description: "For standard properties",
       highlights: {
@@ -55,14 +40,15 @@ export default function SubscriptionUpgrade() {
         properties: "1",
       },
       features: ["Vastu Compliance Report"],
-      cta: "Join Now",
+      cta: "Upgrade",
       popular: false,
       badge: null,
+      isCurrent: false,
     },
     {
       name: "Gold",
-      price: "$99",
-      period: "1 month",
+      price: "₹99",
+      period: "1 Month",
       description: "Best value for multiple properties",
       highlights: {
         sft: "> 1000",
@@ -70,14 +56,15 @@ export default function SubscriptionUpgrade() {
         properties: "3",
       },
       features: ["Vastu Compliance Report"],
-      cta: "Join Now",
+      cta: "Upgrade",
       popular: true,
       badge: "Most Popular",
+      isCurrent: false,
     },
     {
       name: "Platinum",
-      price: "$299",
-      period: "2 month",
+      price: "₹299",
+      period: "2 Months",
       description: "Premium with full remedies",
       highlights: {
         sft: "> 1000",
@@ -85,9 +72,10 @@ export default function SubscriptionUpgrade() {
         properties: "10",
       },
       features: ["Vastu Compliance Report", "Remedies for Vastu Dosha"],
-      cta: "Join Now",
+      cta: "Upgrade",
       popular: false,
       badge: "Premium",
+      isCurrent: false,
     },
   ];
 
@@ -110,14 +98,14 @@ export default function SubscriptionUpgrade() {
         </div>
       </div>
 
-      {/* Current Plan */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      {/* Available Plans */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 py-10">
         {availablePlans.map((plan, index) => (
           <div
             key={index}
             className={`pricing-card relative bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${
               plan.popular ? "ring-2 ring-[#421034] shadow-lg" : ""
-            }`}
+            } ${plan.isCurrent ? "opacity-75" : ""}`}
           >
             {plan.badge && (
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
@@ -138,7 +126,7 @@ export default function SubscriptionUpgrade() {
                     {plan.price}
                   </span>
                   <span className="text-gray-600 ml-2">
-                    {plan.period !== "Free" ? `/${plan.period}` : plan.period}
+                    {plan.price === "₹0" ? plan.period : `/${plan.period}`}
                   </span>
                 </div>
                 <p className="text-gray-600 text-sm">{plan.description}</p>
@@ -148,9 +136,7 @@ export default function SubscriptionUpgrade() {
               <div className="mb-6 py-3 px-4 bg-gray-50 rounded-lg">
                 <div className="flex items-center justify-between border-b border-gray-200 pb-2 mb-2">
                   <div className="flex items-center">
-                    <span className="material-icons-outlined text-[#421034] mr-2 text-lg">
-                      straighten
-                    </span>
+                    <Home className="text-[#421034] mr-2 h-5 w-5" />
                     <span className="text-xs text-gray-500 uppercase tracking-wide">
                       SFT
                     </span>
@@ -161,9 +147,7 @@ export default function SubscriptionUpgrade() {
                 </div>
                 <div className="flex items-center justify-between border-b border-gray-200 pb-2 mb-2">
                   <div className="flex items-center">
-                    <span className="material-icons-outlined text-[#421034] mr-2 text-lg">
-                      apartment
-                    </span>
+                    <Building className="text-[#421034] mr-2 h-5 w-5" />
                     <span className="text-xs text-gray-500 uppercase tracking-wide">
                       Floors
                     </span>
@@ -174,9 +158,7 @@ export default function SubscriptionUpgrade() {
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
-                    <span className="material-icons-outlined text-[#421034] mr-2 text-lg">
-                      home_work
-                    </span>
+                    <MapPin className="text-[#421034] mr-2 h-5 w-5" />
                     <span className="text-xs text-gray-500 uppercase tracking-wide">
                       Properties
                     </span>
@@ -191,17 +173,9 @@ export default function SubscriptionUpgrade() {
               <ul className="space-y-2 mb-8">
                 {plan.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-center">
-                    {feature.includes("✘") ? (
-                      <span className="material-icons-outlined text-[#9E9E9E] mr-3 text-lg">
-                        cancel
-                      </span>
-                    ) : (
-                      <span className="material-icons-outlined text-[#4CAF50] mr-3 text-lg">
-                        check_circle
-                      </span>
-                    )}
+                    <CheckCircle className="text-[#4CAF50] mr-3 h-5 w-5" />
                     <span className="text-gray-700 text-base font-medium">
-                      {feature.replace(": ✘", "").replace(": ✔", "")}
+                      {feature}
                     </span>
                   </li>
                 ))}
@@ -210,27 +184,14 @@ export default function SubscriptionUpgrade() {
               {/* CTA */}
               <Button
                 className={`w-full py-3 px-6 text-base font-semibold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg ${
-                  plan.name === "Bronze"
-                    ? "bg-[#421034] hover:bg-[#2E0824] text-white border-0 hover:shadow-xl"
-                    : "border-2 border-[#421034] text-[#421034] hover:bg-[#421034] hover:text-white bg-transparent hover:shadow-lg"
+                  plan.isCurrent
+                    ? "bg-gray-400 text-white cursor-not-allowed"
+                    : plan.name === "Bronze"
+                      ? "bg-[#421034] hover:bg-[#2E0824] text-white"
+                      : "border-2 border-[#421034] text-[#421034] hover:bg-[#421034] hover:text-white bg-transparent"
                 }`}
-                style={{
-                  color: plan.name === "Bronze" ? "white" : "#421034",
-                  borderColor: "#421034",
-                }}
-                onMouseEnter={(e) => {
-                  if (plan.name !== "Bronze") {
-                    e.currentTarget.style.color = "white";
-                    e.currentTarget.style.backgroundColor = "#421034";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (plan.name !== "Bronze") {
-                    e.currentTarget.style.color = "#421034";
-                    e.currentTarget.style.backgroundColor = "transparent";
-                  }
-                }}
-                onClick={() => handlePlanSelect(plan)}
+                disabled={plan.isCurrent}
+                onClick={() => !plan.isCurrent && handlePlanSelect(plan)}
               >
                 {plan.cta}
               </Button>
