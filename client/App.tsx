@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
   const [animationData, setAnimationData] = useState(null);
 
   useEffect(() => {
@@ -25,7 +27,10 @@ const HeroSection = () => {
               save you money and improve your comfort.
             </p>
             <div className="flex justify-center md:justify-start">
-              <button className="bg-[#4A90E2] text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-600 transition duration-300">
+              <button
+                onClick={() => navigate("/login")}
+                className="bg-[#4A90E2] text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-600 transition duration-300"
+              >
                 Get Started
               </button>
               <button className="ml-4 bg-transparent text-[#4A90E2] font-bold py-3 px-6 rounded-lg border-2 border-[#4A90E2] hover:bg-[#4A90E2] hover:text-white transition duration-300">
@@ -174,54 +179,68 @@ const SocialProofSection = () => (
   </section>
 );
 
-const PricingSection = () => (
-  <section className="py-20">
-    <div className="container mx-auto px-4 text-center">
-      <h2 className="text-3xl font-bold text-gray-800 mb-12">Pricing</h2>
-      <div className="flex justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-lg w-full md:w-1/2 lg:w-1/3">
-          <h3 className="text-2xl font-semibold mb-4">Standard Plan</h3>
-          <p className="text-5xl font-bold text-[#4A90E2] mb-4">$29</p>
-          <p className="text-gray-600 mb-6">
-            One-time analysis of your floor plan.
-          </p>
-          <ul className="text-left mb-8">
-            <li className="flex items-center mb-2">
-              <span className="text-green-500 mr-2">✔</span> Full Energy Report
-            </li>
-            <li className="flex items-center mb-2">
-              <span className="text-green-500 mr-2">✔</span> Personalized
-              Recommendations
-            </li>
-            <li className="flex items-center mb-2">
-              <span className="text-green-500 mr-2">✔</span> Email Support
-            </li>
-          </ul>
-          <button className="bg-[#4A90E2] text-white font-bold py-3 px-6 rounded-lg w-full hover:bg-blue-600 transition duration-300">
-            Choose Plan
-          </button>
+const PricingSection = () => {
+  const navigate = useNavigate();
+
+  return (
+    <section className="py-20">
+      <div className="container mx-auto px-4 text-center">
+        <h2 className="text-3xl font-bold text-gray-800 mb-12">Pricing</h2>
+        <div className="flex justify-center">
+          <div className="bg-white p-8 rounded-lg shadow-lg w-full md:w-1/2 lg:w-1/3">
+            <h3 className="text-2xl font-semibold mb-4">Standard Plan</h3>
+            <p className="text-5xl font-bold text-[#4A90E2] mb-4">$29</p>
+            <p className="text-gray-600 mb-6">
+              One-time analysis of your floor plan.
+            </p>
+            <ul className="text-left mb-8">
+              <li className="flex items-center mb-2">
+                <span className="text-green-500 mr-2">✔</span> Full Energy Report
+              </li>
+              <li className="flex items-center mb-2">
+                <span className="text-green-500 mr-2">✔</span> Personalized
+                Recommendations
+              </li>
+              <li className="flex items-center mb-2">
+                <span className="text-green-500 mr-2">✔</span> Email Support
+              </li>
+            </ul>
+            <button
+              onClick={() => navigate('/subscription')}
+              className="bg-[#4A90E2] text-white font-bold py-3 px-6 rounded-lg w-full hover:bg-blue-600 transition duration-300"
+            >
+              Choose Plan
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
-const FinalCallToActionSection = () => (
-  <section className="py-20 bg-[#4A90E2]">
-    <div className="container mx-auto px-4 text-center text-white">
-      <h2 className="text-3xl font-bold mb-4">
-        Ready to Uncover Your Home's Energy Secrets?
-      </h2>
-      <p className="text-lg mb-8">
-        Get started today and take the first step towards a more
-        energy-efficient home.
-      </p>
-      <button className="bg-white text-[#4A90E2] font-bold py-3 px-8 rounded-lg hover:bg-gray-200 transition duration-300">
-        Get Started Now
-      </button>
-    </div>
-  </section>
-);
+const FinalCallToActionSection = () => {
+  const navigate = useNavigate();
+
+  return (
+    <section className="py-20 bg-[#4A90E2]">
+      <div className="container mx-auto px-4 text-center text-white">
+        <h2 className="text-3xl font-bold mb-4">
+          Ready to Uncover Your Home's Energy Secrets?
+        </h2>
+        <p className="text-lg mb-8">
+          Get started today and take the first step towards a more
+          energy-efficient home.
+        </p>
+        <button
+          onClick={() => navigate("/login")}
+          className="bg-white text-[#4A90E2] font-bold py-3 px-8 rounded-lg hover:bg-gray-200 transition duration-300"
+        >
+          Get Started Now
+        </button>
+      </div>
+    </section>
+  );
+};
 
 const LandingPage = () => {
   return (

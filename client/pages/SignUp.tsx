@@ -42,7 +42,7 @@ export default function SignUp() {
         `Successfully signed up with ${provider.charAt(0).toUpperCase() + provider.slice(1)}`,
       );
       setTimeout(() => {
-        navigate("/dashboard");
+        navigate("/subscription");
       }, 1500);
     } catch (err) {
       setError(`Failed to sign up with ${provider}. Please try again.`);
@@ -97,9 +97,11 @@ export default function SignUp() {
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       // Mock successful signup
-      setSuccess("Account created successfully! Redirecting to dashboard...");
+      setSuccess(
+        "Account created successfully! Redirecting to subscription...",
+      );
       setTimeout(() => {
-        navigate("/dashboard");
+        navigate("/subscription");
       }, 1500);
     } catch (err) {
       setError("Sign up failed. Please try again.");

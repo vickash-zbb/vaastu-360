@@ -25,11 +25,11 @@
  */
  :root {
    /* Centralized Brand Variables - Change these to update entire site */
-   --brand-primary: #421034;        /* Main brand color */
-   --brand-secondary: #74038d;      /* Secondary color */
-   --brand-background: #200435;     /* Page background */
+   --brand-primary: #1e6a75;        /* Main brand color - Teal */
+   --brand-secondary: #130e35;      /* Secondary color - Deep Navy */
+   --brand-background: #ffffff;     /* Page background */
    --brand-foreground: #000000;    /* Text color */
-   --brand-accent: #22c55e;         /* Accent color */
+   --brand-accent: #1e6a75;         /* Accent color - Teal */
 
    /* Typography Variables */
    --font-family-primary: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
@@ -54,19 +54,19 @@
    --popover: 0 0% 100%;
    --popover-foreground: 0 0% 0%;
 
-   /* Primary: Dark purple/maroon */
-   --primary: 318 61% 16%;
+   /* Primary: Teal */
+   --primary: 185 60% 30%;
    --primary-foreground: 0 0% 100%;
 
-   /* Secondary: Light purple */
-   --secondary: 289 96% 28%;
+   /* Secondary: Deep Navy */
+   --secondary: 250 65% 15%;
    --secondary-foreground: 0 0% 100%;
 
-    --muted: 318 47% 94%;
+    --muted: 250 20% 95%;
     --muted-foreground: 0 0% 35%;
 
-    --accent: 318 47% 94%;
-    --accent-foreground: 318 61% 16%;
+    --accent: 185 30% 95%;
+    --accent-foreground: 250 65% 15%;
 
     /* Success green for checkmarks */
     --success: 142 72% 41%;
@@ -75,21 +75,21 @@
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 225 7% 78%;
-    --input: 220 14% 91%;
-    --ring: 318 61% 16%;
+    --border: 250 20% 85%;
+    --input: 250 20% 95%;
+    --ring: 250 65% 15%;
 
     --radius: 0.75rem;
 
     /* Sidebar tokens aligned to brand */
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 0 0% 0%;
-    --sidebar-primary: 318 61% 16%;
+    --sidebar-primary: 250 65% 15%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 318 47% 94%;
-    --sidebar-accent-foreground: 318 61% 16%;
-    --sidebar-border: 318 20% 88%;
-    --sidebar-ring: 318 61% 16%;
+    --sidebar-accent: 185 30% 95%;
+    --sidebar-accent-foreground: 250 65% 15%;
+    --sidebar-border: 250 20% 88%;
+    --sidebar-ring: 250 65% 15%;
   }
 
   .dark {
@@ -175,43 +175,25 @@
     scroll-behavior: smooth;
   }
 
-  /* Custom animations */
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+  /* Minimal hover effects */
+  .hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
-  @keyframes glow {
-    0%, 100% { box-shadow: 0 0 5px rgba(66, 16, 52, 0.2); }
-    50% { box-shadow: 0 0 20px rgba(66, 16, 52, 0.4), 0 0 30px rgba(66, 16, 52, 0.2); }
-  }
-
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
-  }
-
-  .animate-glow {
-    animation: glow 2s ease-in-out infinite;
-  }
-
-  /* Button hover effects */
-  .btn-hover-lift {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .btn-hover-lift:hover {
+  .hover-lift:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(66, 16, 52, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
-  /* Card hover effects */
-  .card-hover {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Subtle floating animation for hero background elements */
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-10px) rotate(1deg); }
+    66% { transform: translateY(5px) rotate(-1deg); }
   }
 
-  .card-hover:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(66, 16, 52, 0.1);
+  .animate-float-slow {
+    animation: float-slow 8s ease-in-out infinite;
   }
 }
 body{
@@ -222,4 +204,10 @@ body{
 }
 .bg-background{
     background: white;
+  }
+  .bg-primary{
+    background-color: #1e6a75 !important;
+  }
+  .text-primary {
+    color: #1e6a75 !important;
   }

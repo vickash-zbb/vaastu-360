@@ -1,138 +1,115 @@
-import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React from "react";
 
 const TestimonialsSection: React.FC = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    if (sectionRef.current) {
-      const testimonials = gsap.utils.toArray('.testimonial-card');
-
-      testimonials.forEach((testimonial, index) => {
-        gsap.from(testimonial as Element, {
-          x: index % 2 === 0 ? -50 : 50,
-          opacity: 0,
-          duration: 0.8,
-          delay: index * 0.2,
-          scrollTrigger: {
-            trigger: testimonial as Element,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse'
-          }
-        });
-      });
-    }
-  }, []);
-
   const testimonials = [
     {
-      name: 'Priya Sharma',
-      role: 'Homeowner',
-      avatar: 'PS',
+      name: "Priya Sharma",
+      role: "Homeowner",
+      avatar: "PS",
       rating: 5,
-      text: 'Vaastu360 completely transformed how I approach home design. The AI analysis was spot-on and saved me thousands in renovation costs.',
-      location: 'Mumbai, India'
+      text: "Vaastu360 completely transformed how I approach home design. The AI analysis was spot-on and saved me thousands in renovation costs.",
+      location: "Mumbai, India",
     },
     {
-      name: 'Rajesh Kumar',
-      role: 'Architect',
-      avatar: 'RK',
+      name: "Rajesh Kumar",
+      role: "Architect",
+      avatar: "RK",
       rating: 5,
-      text: 'As an architect, I\'m impressed by the accuracy and depth of analysis. It\'s become an essential tool in my design process.',
-      location: 'Delhi, India'
+      text: "As an architect, I'm impressed by the accuracy and depth of analysis. It's become an essential tool in my design process.",
+      location: "Delhi, India",
     },
     {
-      name: 'Anita Patel',
-      role: 'Interior Designer',
-      avatar: 'AP',
+      name: "Anita Patel",
+      role: "Interior Designer",
+      avatar: "AP",
       rating: 5,
-      text: 'The personalized remedies and energy mapping features are incredible. My clients love the detailed insights and recommendations.',
-      location: 'Ahmedabad, India'
-    }
+      text: "The personalized remedies and energy mapping features are incredible. My clients love the detailed insights and recommendations.",
+      location: "Ahmedabad, India",
+    },
   ];
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }).map((_, i) => (
       <span
         key={i}
-        className={`material-icons-outlined text-sm ${i < rating ? 'text-yellow-400' : 'text-gray-300'}`}
+        className={`text-yellow-400 ${i < rating ? "text-yellow-400" : "text-gray-300"}`}
       >
-        star
+        ★
       </span>
     ));
   };
 
   return (
-    <section id="testimonials" ref={sectionRef} className="py-20 bg-gradient-to-br from-[#FDF6FC] to-[#F7EEF9]">
+    <section className="py-24 bg-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             What Our Users Say
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Join thousands of satisfied users who have transformed their spaces with Vaastu360
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Join thousands of satisfied users who have transformed their spaces
+            with Vaastu360's AI-powered insights
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="testimonial-card bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+              className="bg-gray-50 rounded-lg p-6 border border-gray-200"
             >
-              {/* Rating */}
               <div className="flex items-center mb-4">
-                {renderStars(testimonial.rating)}
+                <div className="flex text-yellow-400">
+                  {renderStars(testimonial.rating)}
+                </div>
+                <span className="ml-2 text-sm text-gray-600">
+                  {testimonial.rating}.0
+                </span>
               </div>
 
-              {/* Quote */}
               <blockquote className="text-gray-700 mb-6 leading-relaxed">
                 "{testimonial.text}"
               </blockquote>
 
-              {/* Author */}
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
-                  <span className="text-primary font-semibold text-lg">
+                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                  <span className="text-green-600 font-semibold text-sm">
                     {testimonial.avatar}
                   </span>
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-800">{testimonial.name}</p>
+                  <p className="font-semibold text-gray-900">
+                    {testimonial.name}
+                  </p>
                   <p className="text-sm text-gray-600">{testimonial.role}</p>
-                  <p className="text-xs text-gray-500">{testimonial.location}</p>
+                  <p className="text-xs text-gray-500">
+                    {testimonial.location}
+                  </p>
                 </div>
-              </div>
-
-              {/* Decorative element */}
-              <div className="absolute top-4 right-4 opacity-10">
-                <span className="material-icons-outlined text-4xl text-primary">format_quote</span>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Stats */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <div>
-            <div className="text-3xl md:text-4xl font-bold text-primary mb-2">10,000+</div>
-            <div className="text-gray-600">Happy Users</div>
-          </div>
-          <div>
-            <div className="text-3xl md:text-4xl font-bold text-primary mb-2">50,000+</div>
-            <div className="text-gray-600">Analyses Done</div>
-          </div>
-          <div>
-            <div className="text-3xl md:text-4xl font-bold text-primary mb-2">4.9/5</div>
-            <div className="text-gray-600">Average Rating</div>
-          </div>
-          <div>
-            <div className="text-3xl md:text-4xl font-bold text-primary mb-2">24/7</div>
-            <div className="text-gray-600">AI Support</div>
-          </div>
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
+          {[
+            { number: "10,000+", label: "Happy Users", icon: "people" },
+            { number: "50,000+", label: "Analyses Done", icon: "analytics" },
+            { number: "4.9/5", label: "Average Rating", icon: "star" },
+            { number: "24/7", label: "AI Support", icon: "support" },
+          ].map((stat, index) => (
+            <div key={index} className="text-center">
+              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                <span className="material-icons-outlined text-xl text-green-600">
+                  {stat.icon}
+                </span>
+              </div>
+              <div className="text-2xl font-bold text-gray-900 mb-1">
+                {stat.number}
+              </div>
+              <div className="text-gray-600 text-sm">{stat.label}</div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
