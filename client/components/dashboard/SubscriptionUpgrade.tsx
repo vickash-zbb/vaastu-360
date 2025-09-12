@@ -19,7 +19,7 @@ export default function SubscriptionUpgrade() {
       period: "1 Week Free",
       description: "Perfect for small spaces",
       highlights: {
-        sft: "< 1000",
+        sft: "&lt; 1000",
         floors: "1",
         properties: "1",
       },
@@ -35,7 +35,7 @@ export default function SubscriptionUpgrade() {
       period: "1 Week",
       description: "For standard properties",
       highlights: {
-        sft: "> 1000",
+        sft: "&gt; 1000",
         floors: "3",
         properties: "1",
       },
@@ -51,7 +51,7 @@ export default function SubscriptionUpgrade() {
       period: "1 Month",
       description: "Best value for multiple properties",
       highlights: {
-        sft: "> 1000",
+        sft: "&gt; 1000",
         floors: "3",
         properties: "3",
       },
@@ -67,7 +67,7 @@ export default function SubscriptionUpgrade() {
       period: "2 Months",
       description: "Premium with full remedies",
       highlights: {
-        sft: "> 1000",
+        sft: "&gt; 1000",
         floors: "3",
         properties: "10",
       },
@@ -102,9 +102,9 @@ export default function SubscriptionUpgrade() {
         {/* Pricing Cards Grid */}
         <div className="plan-cards-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Bronze Plan */}
-          <div className="plan-card bronze-plan bg-white rounded-lg shadow-lg p-6 relative border-2 border-gray-200">
-            <div className="plan-badge free-badge absolute -top-3 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
-              Free
+          <div className="plan-card bronze-plan bg-white rounded-lg shadow-lg p-6 relative border-2 border-[#421034] bg-gray-50">
+            <div className="plan-badge current-badge absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[#421034] text-white px-4 py-1 rounded-full text-sm font-semibold">
+              Current Plan
             </div>
             <div className="plan-content">
               <h3 className="plan-title text-2xl font-bold text-center mb-4 text-gray-800">
@@ -130,7 +130,7 @@ export default function SubscriptionUpgrade() {
                   <span className="feature-label text-gray-600">
                     Area (SFT)
                   </span>
-                  <span className="feature-value font-semibold">< 1000</span>
+                  <span className="feature-value font-semibold">&lt; 1000</span>
                 </div>
                 <div className="feature-row flex justify-between items-center">
                   <span className="feature-label text-gray-600">Floors</span>
@@ -159,10 +159,10 @@ export default function SubscriptionUpgrade() {
               </div>
 
               <Button
-                onClick={() => handlePlanSelect(availablePlans[0])}
-                className="btn btn-primary w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300"
+                disabled
+                className="btn btn-primary w-full bg-gray-400 text-white font-semibold py-3 px-6 rounded-lg cursor-not-allowed"
               >
-                Start Free
+                Current Plan
               </Button>
             </div>
           </div>
@@ -193,7 +193,7 @@ export default function SubscriptionUpgrade() {
                   <span className="feature-label text-gray-600">
                     Area (SFT)
                   </span>
-                  <span className="feature-value font-semibold">> 1000</span>
+                  <span className="feature-value font-semibold">&gt; 1000</span>
                 </div>
                 <div className="feature-row flex justify-between items-center">
                   <span className="feature-label text-gray-600">Floors</span>
@@ -223,9 +223,9 @@ export default function SubscriptionUpgrade() {
 
               <Button
                 onClick={() => handlePlanSelect(availablePlans[1])}
-                className="btn btn-outline-primary w-full border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold py-3 px-6 rounded-lg transition duration-300"
+                className="btn btn-outline-primary w-full border-2 border-[#421034] text-[#421034] bg-transparent hover:bg-[#421034] hover:text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-sm hover:shadow-md"
               >
-                Join Now
+                Upgrade
               </Button>
             </div>
           </div>
@@ -259,7 +259,7 @@ export default function SubscriptionUpgrade() {
                   <span className="feature-label text-gray-600">
                     Area (SFT)
                   </span>
-                  <span className="feature-value font-semibold">> 1000</span>
+                  <span className="feature-value font-semibold">&gt; 1000</span>
                 </div>
                 <div className="feature-row flex justify-between items-center">
                   <span className="feature-label text-gray-600">Floors</span>
@@ -289,9 +289,9 @@ export default function SubscriptionUpgrade() {
 
               <Button
                 onClick={() => handlePlanSelect(availablePlans[2])}
-                className="btn btn-outline-primary w-full border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold py-3 px-6 rounded-lg transition duration-300"
+                className="btn btn-outline-primary w-full border-2 border-[#421034] text-[#421034] bg-transparent hover:bg-[#421034] hover:text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-sm hover:shadow-md"
               >
-                Join Now
+                Upgrade
               </Button>
             </div>
           </div>
@@ -325,7 +325,7 @@ export default function SubscriptionUpgrade() {
                   <span className="feature-label text-gray-600">
                     Area (SFT)
                   </span>
-                  <span className="feature-value font-semibold">> 1000</span>
+                  <span className="feature-value font-semibold">&gt; 1000</span>
                 </div>
                 <div className="feature-row flex justify-between items-center">
                   <span className="feature-label text-gray-600">Floors</span>
@@ -369,9 +369,9 @@ export default function SubscriptionUpgrade() {
 
               <Button
                 onClick={() => handlePlanSelect(availablePlans[3])}
-                className="btn btn-outline-primary w-full border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold py-3 px-6 rounded-lg transition duration-300"
+                className="btn btn-outline-primary w-full border-2 border-[#421034] text-[#421034] bg-transparent hover:bg-[#421034] hover:text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-sm hover:shadow-md"
               >
-                Join Now
+                Upgrade
               </Button>
             </div>
           </div>
