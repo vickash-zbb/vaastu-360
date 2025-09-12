@@ -111,75 +111,76 @@ export default function SignUp() {
   };
 
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Back Navigation */}
-      <div className="container mx-80 px-4 pt-8">
+      <div className="container mx-auto px-4 pt-8">
         <Link
           to="/subscription"
-          className="inline-flex items-center gap-4 text-black hover:text-primary transition-colors"
+          className="inline-flex items-center gap-3 text-gray-700 hover:text-blue-600 transition-all duration-200 group"
         >
-          <div className="w-6 h-6 flex items-center justify-center">
+          <div className="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-sm group-hover:shadow-md transition-shadow">
             <svg
-              width="12"
-              height="12"
+              width="16"
+              height="16"
               viewBox="0 0 12 12"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              className="group-hover:-translate-x-0.5 transition-transform"
             >
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
                 d="M12 6C12 6.41421 11.6642 6.75 11.25 6.75L2.56066 6.75L5.78033 9.96967C6.07322 10.2626 6.07322 10.7374 5.78033 11.0303C5.48744 11.3232 5.01256 11.3232 4.71967 11.0303L0.219669 6.53033C-0.0732231 6.23744 -0.0732231 5.76256 0.219669 5.46967L4.71967 0.96967C5.01256 0.676777 5.48744 0.676777 5.78033 0.96967C6.07322 1.26256 6.07322 1.73744 5.78033 2.03033L2.56066 5.25L11.25 5.25C11.6642 5.25 12 5.58579 12 6Z"
-                fill="#212529"
+                fill="currentColor"
               />
             </svg>
           </div>
-          <span
-            style={{
-              fontFamily: "Noto Sans Devanagari, sans-serif",
-              fontSize: "16px",
-            }}
-          >
-            Back to Subscription selection
-          </span>
+          <span className="font-medium">Back to Subscription</span>
         </Link>
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-8 sm:py-12 flex justify-center">
-        <div className="w-full max-w-4xl bg-white rounded-2xl shadow-2xl p-6 sm:p-8 lg:p-12">
-          <div className="max-w-2xl mx-auto space-y-6 sm:space-y-8">
-            {/* Error/Success Messages */}
-            {error && (
-              <Alert variant="destructive">
-                <AlertCircle className="h-4 w-4" />
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
+      <div className="container mx-auto px-4 py-12 flex justify-center">
+        <div className="w-full max-w-md">
+          {/* Header */}
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              Create Account
+            </h1>
+            <p className="text-gray-600">
+              Join Vastu360 and start your journey
+            </p>
+          </div>
+          {/* Error/Success Messages */}
+          {error && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-3">
+              <AlertCircle className="h-5 w-5 text-red-500 flex-shrink-0" />
+              <p className="text-red-700 text-sm">{error}</p>
+            </div>
+          )}
 
-            {success && (
-              <Alert className="border-green-200 bg-green-50">
-                <CheckCircle className="h-4 w-4 text-green-600" />
-                <AlertDescription className="text-green-800">
-                  {success}
-                </AlertDescription>
-              </Alert>
-            )}
+          {success && (
+            <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center gap-3">
+              <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
+              <p className="text-green-700 text-sm">{success}</p>
+            </div>
+          )}
 
-            {/* Social Login Buttons */}
-            <div className="grid grid-cols-3 gap-2 sm:gap-3">
-              <Button
-                onClick={() => handleSocialLogin("google")}
-                disabled={socialLoading !== null}
-                className="flex items-center justify-center p-3 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 transition-colors shadow-sm disabled:opacity-50"
-                variant="outline"
-              >
-                {socialLoading === "google" ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
+          {/* Social Login Buttons */}
+          <div className="space-y-3 mb-6">
+            <Button
+              onClick={() => handleSocialLogin("google")}
+              disabled={socialLoading !== null}
+              className="w-full flex items-center justify-center gap-3 p-4 border border-gray-300 rounded-xl bg-white hover:bg-gray-50 transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50"
+              variant="outline"
+            >
+              {socialLoading === "google" ? (
+                <Loader2 className="h-5 w-5 animate-spin" />
+              ) : (
+                <>
                   <svg
-                    width="24"
-                    height="24"
+                    width="20"
+                    height="20"
                     viewBox="0 0 25 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -213,21 +214,24 @@ export default function SignUp() {
                       </clipPath>
                     </defs>
                   </svg>
-                )}
-              </Button>
+                  <span className="font-medium">Continue with Google</span>
+                </>
+              )}
+            </Button>
 
-              <Button
-                onClick={() => handleSocialLogin("facebook")}
-                disabled={socialLoading !== null}
-                className="flex items-center justify-center p-3 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 transition-colors shadow-sm disabled:opacity-50"
-                variant="outline"
-              >
-                {socialLoading === "facebook" ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
+            <Button
+              onClick={() => handleSocialLogin("facebook")}
+              disabled={socialLoading !== null}
+              className="w-full flex items-center justify-center gap-3 p-4 border border-gray-300 rounded-xl bg-white hover:bg-gray-50 transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50"
+              variant="outline"
+            >
+              {socialLoading === "facebook" ? (
+                <Loader2 className="h-5 w-5 animate-spin" />
+              ) : (
+                <>
                   <svg
-                    width="24"
-                    height="24"
+                    width="20"
+                    height="20"
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -248,21 +252,24 @@ export default function SignUp() {
                       </clipPath>
                     </defs>
                   </svg>
-                )}
-              </Button>
+                  <span className="font-medium">Continue with Facebook</span>
+                </>
+              )}
+            </Button>
 
-              <Button
-                onClick={() => handleSocialLogin("apple")}
-                disabled={socialLoading !== null}
-                className="flex items-center justify-center p-3 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 transition-colors shadow-sm disabled:opacity-50"
-                variant="outline"
-              >
-                {socialLoading === "apple" ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
+            <Button
+              onClick={() => handleSocialLogin("apple")}
+              disabled={socialLoading !== null}
+              className="w-full flex items-center justify-center gap-3 p-4 border border-gray-300 rounded-xl bg-white hover:bg-gray-50 transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50"
+              variant="outline"
+            >
+              {socialLoading === "apple" ? (
+                <Loader2 className="h-5 w-5 animate-spin" />
+              ) : (
+                <>
                   <svg
-                    width="24"
-                    height="24"
+                    width="20"
+                    height="20"
                     viewBox="0 0 25 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -272,235 +279,162 @@ export default function SignUp() {
                       fill="black"
                     />
                   </svg>
-                )}
-              </Button>
+                  <span className="font-medium">Continue with Apple</span>
+                </>
+              )}
+            </Button>
+          </div>
+
+          {/* Divider */}
+          <div className="relative mb-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-4 bg-gradient-to-br from-blue-50 via-white to-purple-50 text-gray-500">
+                Or continue with email
+              </span>
+            </div>
+          </div>
+
+          {/* Sign Up Form */}
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="grid grid-cols-2 gap-4">
+              {/* First Name */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+                  placeholder="First name"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all duration-200"
+                  required
+                />
+              </div>
+
+              {/* Last Name */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  placeholder="Last name"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all duration-200"
+                  required
+                />
+              </div>
             </div>
 
-            {/* Login Link */}
-            <div
-              className="text-center"
-              style={{
-                fontFamily: "Roboto, sans-serif",
-                fontSize: "16px",
-                lineHeight: "200%",
-              }}
+            {/* Email */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-700">
+                Email or Mobile Number
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                placeholder="Enter your email or mobile"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all duration-200"
+                required
+              />
+            </div>
+
+            {/* Password */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-700">
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+                placeholder="Create a password"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all duration-200"
+                required
+              />
+            </div>
+
+            {/* Confirm Password */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-700">
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleInputChange}
+                placeholder="Confirm your password"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all duration-200"
+                required
+              />
+            </div>
+
+            {/* Terms Agreement */}
+            <div className="flex items-start gap-3">
+              <input
+                type="checkbox"
+                name="agreeToTerms"
+                checked={formData.agreeToTerms}
+                onChange={handleInputChange}
+                className="w-4 h-4 mt-1 border border-gray-300 rounded focus:ring-2 focus:ring-blue-100"
+                required
+              />
+              <label className="text-sm text-gray-600 leading-relaxed">
+                I agree to the{" "}
+                <a
+                  href="/terms"
+                  className="text-blue-600 hover:text-blue-700 underline"
+                >
+                  Terms of Service
+                </a>{" "}
+                and{" "}
+                <a
+                  href="/privacy"
+                  className="text-blue-600 hover:text-blue-700 underline"
+                >
+                  Privacy Policy
+                </a>
+              </label>
+            </div>
+
+            {/* Submit Button */}
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <span className="text-gray-600">Already have an account? </span>
-              <Link to="/login" className="text-blue-600 hover:text-blue-700">
-                Login
-              </Link>
-            </div>
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Creating Account...
+                </>
+              ) : (
+                "Create Account"
+              )}
+            </Button>
+          </form>
 
-            {/* Divider */}
-            <div
-              className="text-center text-gray-600"
-              style={{
-                fontFamily: "Roboto, sans-serif",
-                fontSize: "16px",
-                lineHeight: "200%",
-              }}
+          {/* Login Link */}
+          <div className="text-center mt-6">
+            <span className="text-gray-600">Already have an account? </span>
+            <Link
+              to="/login"
+              className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
             >
-              Or
-            </div>
-
-            {/* Sign Up Form */}
-            <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-7">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-7">
-                {/* First Name */}
-                <div className="space-y-1.5">
-                  <label
-                    className="text-gray-700 font-medium"
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "14px",
-                      lineHeight: "20px",
-                    }}
-                  >
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    placeholder="Enter Your First Name"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors shadow-sm"
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "16px",
-                      lineHeight: "24px",
-                    }}
-                    required
-                  />
-                </div>
-
-                {/* Last Name */}
-                <div className="space-y-1.5">
-                  <label
-                    className="text-gray-700 font-medium"
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "14px",
-                      lineHeight: "20px",
-                    }}
-                  >
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    placeholder="Enter Your Last Name"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors shadow-sm"
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "16px",
-                      lineHeight: "24px",
-                    }}
-                    required
-                  />
-                </div>
-              </div>
-
-              {/* Email */}
-              <div className="space-y-1.5">
-                <label
-                  className="text-gray-700 font-medium"
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "14px",
-                    lineHeight: "20px",
-                  }}
-                >
-                  Email Or Mobile Number
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  placeholder="Enter Email Or Mobile Number"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors shadow-sm"
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "16px",
-                    lineHeight: "24px",
-                  }}
-                  required
-                />
-              </div>
-
-              {/* Password */}
-              <div className="space-y-1.5">
-                <label
-                  className="text-gray-700 font-medium"
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "14px",
-                    lineHeight: "20px",
-                  }}
-                >
-                  Password
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  placeholder="Enter Password"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors shadow-sm"
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "16px",
-                    lineHeight: "24px",
-                  }}
-                  required
-                />
-              </div>
-
-              {/* Confirm Password */}
-              <div className="space-y-1.5">
-                <label
-                  className="text-gray-700 font-medium"
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "14px",
-                    lineHeight: "20px",
-                  }}
-                >
-                  Confirmation Password
-                </label>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleInputChange}
-                  placeholder="Enter Confirmation Password"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors shadow-sm"
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "16px",
-                    lineHeight: "24px",
-                  }}
-                  required
-                />
-              </div>
-
-              {/* Terms Agreement */}
-              <div className="flex items-center gap-3">
-                <div className="relative">
-                  <input
-                    type="checkbox"
-                    name="agreeToTerms"
-                    checked={formData.agreeToTerms}
-                    onChange={handleInputChange}
-                    className="w-4 h-4 border border-success rounded bg-white focus:ring-2 focus:ring-success"
-                    required
-                  />
-                </div>
-                <label
-                  className="text-center"
-                  style={{
-                    fontFamily: "Roboto, sans-serif",
-                    fontSize: "16px",
-                    lineHeight: "200%",
-                  }}
-                >
-                  <span className="text-black">I agree to the </span>
-                  <a
-                    href="/terms"
-                    className="text-blue-600 hover:text-blue-700 underline"
-                  >
-                    Terms of Service
-                  </a>
-                  <span className="text-black"> and </span>
-                  <a
-                    href="/privacy"
-                    className="text-blue-600 hover:text-blue-700 underline"
-                  >
-                    Privacy Policy
-                  </a>
-                </label>
-              </div>
-
-              {/* Submit Button */}
-              <Button
-                type="submit"
-                disabled={isLoading}
-                className="w-full py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors text-lg sm:text-xl disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{ fontFamily: "Roboto, sans-serif", lineHeight: "150%" }}
-              >
-                {isLoading ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Creating Account...
-                  </>
-                ) : (
-                  "Continue"
-                )}
-              </Button>
-            </form>
+              Sign in
+            </Link>
           </div>
         </div>
       </div>

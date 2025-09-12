@@ -259,7 +259,12 @@ export default function Dashboard() {
       case "subscription-upgrade":
         return <SubscriptionUpgrade />;
       default:
-        return <DashboardOverview setActiveSection={setActiveSection} />;
+        return (
+          <DashboardOverview
+            setActiveSection={setActiveSection}
+            navigate={navigate}
+          />
+        );
     }
   };
 
