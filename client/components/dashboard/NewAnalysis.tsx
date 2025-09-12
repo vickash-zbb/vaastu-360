@@ -597,8 +597,8 @@ export default function NewAnalysis() {
               Upload Floor Plan
             </h1>
             <p className="text-lg text-gray-600 mb-2">
-              Upload your property's floor plan for AI-powered room detection
-              and comprehensive Vaastu analysis.
+              Upload your property's floor plan for Smart room detection and
+              comprehensive Vaastu analysis.
             </p>
             <p className="text-sm text-gray-500">
               Supports JPG, PNG, PDF files up to 10MB. Upload at least 4 images
@@ -751,8 +751,8 @@ export default function NewAnalysis() {
                       Analysis Settings
                     </h4>
                     <p className="text-sm text-purple-700 mb-3">
-                      AI will automatically detect rooms and their boundaries.
-                      You can adjust these in the next step.
+                      Smart system will automatically detect rooms and their
+                      boundaries. You can adjust these in the next step.
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {uploadedFiles.slice(0, 4).map((fileData) => (
@@ -1029,9 +1029,9 @@ export default function NewAnalysis() {
                       Detection Accuracy
                     </h4>
                     <p className="text-sm text-blue-700 mt-1">
-                      Our AI will automatically detect rooms, doors, and windows
-                      in your floor plan. You can choose to review and adjust
-                      detections manually in the next step.
+                      Our Smart system will automatically detect rooms, doors,
+                      and windows in your floor plan. You can choose to review
+                      and adjust detections manually in the next step.
                     </p>
                   </div>
                 </div>

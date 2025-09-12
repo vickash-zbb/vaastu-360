@@ -6,7 +6,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Upload,
@@ -20,14 +26,14 @@ import {
   MapPin,
   Home,
   Search,
-  Clock
+  Clock,
 } from "lucide-react";
 
 interface UploadedFile {
   id: string;
   file: File;
   progress: number;
-  status: 'uploading' | 'completed' | 'error';
+  status: "uploading" | "completed" | "error";
   speed: string;
 }
 
@@ -45,15 +51,24 @@ export default function Vaastu360Upload() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Stage 1: Property Address
-  const [selectedLocation, setSelectedLocation] = useState<LocationData | null>(null);
+  const [selectedLocation, setSelectedLocation] = useState<LocationData | null>(
+    null,
+  );
   const [searchQuery, setSearchQuery] = useState("");
-  const [mapStyle, setMapStyle] = useState<'streets' | 'satellite' | 'terrain'>('streets');
+  const [mapStyle, setMapStyle] = useState<"streets" | "satellite" | "terrain">(
+    "streets",
+  );
 
   // Stage 3: Review & Settings
-  const [fileSettings, setFileSettings] = useState<Record<string, {
-    scale: string;
-    detectionAccuracy: 'auto' | 'manual';
-  }>>({});
+  const [fileSettings, setFileSettings] = useState<
+    Record<
+      string,
+      {
+        scale: string;
+        detectionAccuracy: "auto" | "manual";
+      }
+    >
+  >({});
 
   // Navigation functions
   const nextStage = () => {
@@ -74,7 +89,7 @@ export default function Vaastu360Upload() {
 
     try {
       const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchQuery)}&limit=1`
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchQuery)}&limit=1`,
       );
       const data = await response.json();
 
@@ -83,22 +98,27 @@ export default function Vaastu360Upload() {
         setSelectedLocation({
           lat: parseFloat(lat),
           lng: parseFloat(lon),
-          address: display_name
+          address: display_name,
         });
       }
     } catch (error) {
-      console.error('Search failed:', error);
+      console.error("Search failed:", error);
     }
   };
 
   const handleMapClick = () => {
-    const newLat = (selectedLocation?.lat || 40.7128) + (Math.random() - 0.5) * 0.01;
-    const newLng = (selectedLocation?.lng || -74.0060) + (Math.random() - 0.5) * 0.01;
+    const newLat =
+      (selectedLocation?.lat || 40.7128) + (Math.random() - 0.5) * 0.01;
+    const newLng =
+      (selectedLocation?.lng || -74.006) + (Math.random() - 0.5) * 0.01;
 
-    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${newLat}&lon=${newLng}`)
-      .then(response => response.json())
-      .then(data => {
-        const address = data.display_name || `${newLat.toFixed(6)}, ${newLng.toFixed(6)}`;
+    fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${newLat}&lon=${newLng}`,
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        const address =
+          data.display_name || `${newLat.toFixed(6)}, ${newLng.toFixed(6)}`;
         setSelectedLocation({ lat: newLat, lng: newLng, address });
       })
       .catch(() => {
@@ -110,45 +130,57 @@ export default function Vaastu360Upload() {
   const handleFileSelect = useCallback((files: FileList | null) => {
     if (!files) return;
 
-    const newFiles: UploadedFile[] = Array.from(files).map(file => ({
+    const newFiles: UploadedFile[] = Array.from(files).map((file) => ({
       id: Math.random().toString(36).substr(2, 9),
       file,
       progress: 0,
-      status: 'uploading' as const,
-      speed: '0 KB/s'
+      status: "uploading" as const,
+      speed: "0 KB/s",
     }));
 
-    setUploadedFiles(prev => [...prev, ...newFiles]);
+    setUploadedFiles((prev) => [...prev, ...newFiles]);
 
     // Initialize settings for new files
-    const newSettings: Record<string, { scale: string; detectionAccuracy: 'auto' | 'manual' }> = {};
-    newFiles.forEach(fileData => {
-      newSettings[fileData.id] = { scale: '1:100', detectionAccuracy: 'auto' };
+    const newSettings: Record<
+      string,
+      { scale: string; detectionAccuracy: "auto" | "manual" }
+    > = {};
+    newFiles.forEach((fileData) => {
+      newSettings[fileData.id] = { scale: "1:100", detectionAccuracy: "auto" };
     });
-    setFileSettings(prev => ({ ...prev, ...newSettings }));
+    setFileSettings((prev) => ({ ...prev, ...newSettings }));
 
     // Simulate upload progress
-    newFiles.forEach(uploadedFile => {
+    newFiles.forEach((uploadedFile) => {
       let progress = 0;
       const interval = setInterval(() => {
         progress += Math.random() * 15;
         if (progress >= 100) {
           progress = 100;
           clearInterval(interval);
-          setUploadedFiles(prev =>
-            prev.map(f =>
+          setUploadedFiles((prev) =>
+            prev.map((f) =>
               f.id === uploadedFile.id
-                ? { ...f, progress: 100, status: 'completed' as const, speed: '0 KB/s' }
-                : f
-            )
+                ? {
+                    ...f,
+                    progress: 100,
+                    status: "completed" as const,
+                    speed: "0 KB/s",
+                  }
+                : f,
+            ),
           );
         } else {
-          setUploadedFiles(prev =>
-            prev.map(f =>
+          setUploadedFiles((prev) =>
+            prev.map((f) =>
               f.id === uploadedFile.id
-                ? { ...f, progress, speed: `${Math.floor(Math.random() * 200) + 50} KB/s` }
-                : f
-            )
+                ? {
+                    ...f,
+                    progress,
+                    speed: `${Math.floor(Math.random() * 200) + 50} KB/s`,
+                  }
+                : f,
+            ),
           );
         }
       }, 200);
@@ -165,15 +197,18 @@ export default function Vaastu360Upload() {
     setIsDragOver(false);
   }, []);
 
-  const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(false);
-    handleFileSelect(e.dataTransfer.files);
-  }, [handleFileSelect]);
+  const handleDrop = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      setIsDragOver(false);
+      handleFileSelect(e.dataTransfer.files);
+    },
+    [handleFileSelect],
+  );
 
   const removeFile = (fileId: string) => {
-    setUploadedFiles(prev => prev.filter(f => f.id !== fileId));
-    setFileSettings(prev => {
+    setUploadedFiles((prev) => prev.filter((f) => f.id !== fileId));
+    setFileSettings((prev) => {
       const newSettings = { ...prev };
       delete newSettings[fileId];
       return newSettings;
@@ -181,44 +216,48 @@ export default function Vaastu360Upload() {
   };
 
   // Stage 3 functions
-  const updateFileSetting = (fileId: string, setting: 'scale' | 'detectionAccuracy', value: string) => {
-    setFileSettings(prev => ({
+  const updateFileSetting = (
+    fileId: string,
+    setting: "scale" | "detectionAccuracy",
+    value: string,
+  ) => {
+    setFileSettings((prev) => ({
       ...prev,
       [fileId]: {
         ...prev[fileId],
-        [setting]: value
-      }
+        [setting]: value,
+      },
     }));
   };
 
   const startAnalysis = () => {
     // Navigate to report page with analysis data
-    navigate('/report', {
+    navigate("/report", {
       state: {
-        propertyName: 'Sunset Villa',
-        address: selectedLocation?.address || 'Selected Location',
+        propertyName: "Sunset Villa",
+        address: selectedLocation?.address || "Selected Location",
         location: selectedLocation,
-        files: uploadedFiles.map(f => ({
+        files: uploadedFiles.map((f) => ({
           file: f.file,
           id: f.id,
-          scale: fileSettings[f.id]?.scale || '1:100',
-          detectionAccuracy: fileSettings[f.id]?.detectionAccuracy || 'auto'
-        }))
-      }
+          scale: fileSettings[f.id]?.scale || "1:100",
+          detectionAccuracy: fileSettings[f.id]?.detectionAccuracy || "auto",
+        })),
+      },
     });
   };
 
   const formatFileSize = (bytes: number) => {
-    if (bytes === 0) return '0 Bytes';
+    if (bytes === 0) return "0 Bytes";
     const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const sizes = ["Bytes", "KB", "MB", "GB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
   };
 
   const getFileIcon = (fileName: string) => {
-    const extension = fileName.split('.').pop()?.toLowerCase();
-    if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(extension || '')) {
+    const extension = fileName.split(".").pop()?.toLowerCase();
+    if (["jpg", "jpeg", "png", "gif", "webp"].includes(extension || "")) {
       return <ImageIcon className="h-4 w-4" />;
     }
     return <FileText className="h-4 w-4" />;
@@ -231,9 +270,12 @@ export default function Vaastu360Upload() {
         {/* Main Content */}
         <div className="lg:col-span-2 space-y-6">
           <div className="text-center lg:text-left">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Property Address</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              Property Address
+            </h1>
             <p className="text-gray-600">
-              Select and confirm your property's location for accurate Vastu analysis
+              Select and confirm your property's location for accurate Vastu
+              analysis
             </p>
           </div>
 
@@ -243,7 +285,7 @@ export default function Vaastu360Upload() {
               placeholder="Search for property address..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleLocationSearch()}
+              onKeyPress={(e) => e.key === "Enter" && handleLocationSearch()}
               className="flex-1"
             />
             <Button onClick={handleLocationSearch} variant="outline">
@@ -259,11 +301,16 @@ export default function Vaastu360Upload() {
             >
               <div className="text-center">
                 <div className="text-6xl mb-4">🗺️</div>
-                <div className="text-xl font-medium text-gray-700 mb-2">Interactive Map</div>
-                <div className="text-sm text-gray-500">
-                  Lat: {selectedLocation?.lat.toFixed(4) || '40.7128'}, Lng: {selectedLocation?.lng.toFixed(4) || '-74.0060'}
+                <div className="text-xl font-medium text-gray-700 mb-2">
+                  Interactive Map
                 </div>
-                <div className="text-xs text-gray-400 mt-2">Click to select location</div>
+                <div className="text-sm text-gray-500">
+                  Lat: {selectedLocation?.lat.toFixed(4) || "40.7128"}, Lng:{" "}
+                  {selectedLocation?.lng.toFixed(4) || "-74.0060"}
+                </div>
+                <div className="text-xs text-gray-400 mt-2">
+                  Click to select location
+                </div>
               </div>
             </div>
 
@@ -273,24 +320,24 @@ export default function Vaastu360Upload() {
                 <div className="flex gap-1">
                   <Button
                     size="sm"
-                    variant={mapStyle === 'streets' ? 'default' : 'ghost'}
-                    onClick={() => setMapStyle('streets')}
+                    variant={mapStyle === "streets" ? "default" : "ghost"}
+                    onClick={() => setMapStyle("streets")}
                     className="text-xs"
                   >
                     Streets
                   </Button>
                   <Button
                     size="sm"
-                    variant={mapStyle === 'satellite' ? 'default' : 'ghost'}
-                    onClick={() => setMapStyle('satellite')}
+                    variant={mapStyle === "satellite" ? "default" : "ghost"}
+                    onClick={() => setMapStyle("satellite")}
                     className="text-xs"
                   >
                     Satellite
                   </Button>
                   <Button
                     size="sm"
-                    variant={mapStyle === 'terrain' ? 'default' : 'ghost'}
-                    onClick={() => setMapStyle('terrain')}
+                    variant={mapStyle === "terrain" ? "default" : "ghost"}
+                    onClick={() => setMapStyle("terrain")}
                     className="text-xs"
                   >
                     Terrain
@@ -313,26 +360,36 @@ export default function Vaastu360Upload() {
 
         {/* Property Info Card */}
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-gray-900">Property Details</h3>
+          <h3 className="text-lg font-semibold text-gray-900">
+            Property Details
+          </h3>
 
           {selectedLocation ? (
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <div className="flex items-start space-x-3 mb-4">
                 <MapPin className="w-5 h-5 text-purple-600 mt-1" />
                 <div className="flex-1">
-                  <h4 className="font-medium text-gray-900 mb-1">Selected Location</h4>
-                  <p className="text-sm text-gray-600">{selectedLocation.address}</p>
+                  <h4 className="font-medium text-gray-900 mb-1">
+                    Selected Location
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    {selectedLocation.address}
+                  </p>
                 </div>
               </div>
 
               <div className="space-y-3">
                 <div>
                   <Label className="text-xs text-gray-500">Latitude</Label>
-                  <p className="text-sm font-medium">{selectedLocation.lat.toFixed(6)}</p>
+                  <p className="text-sm font-medium">
+                    {selectedLocation.lat.toFixed(6)}
+                  </p>
                 </div>
                 <div>
                   <Label className="text-xs text-gray-500">Longitude</Label>
-                  <p className="text-sm font-medium">{selectedLocation.lng.toFixed(6)}</p>
+                  <p className="text-sm font-medium">
+                    {selectedLocation.lng.toFixed(6)}
+                  </p>
                 </div>
               </div>
             </div>
@@ -357,9 +414,11 @@ export default function Vaastu360Upload() {
         <div className="lg:col-span-2 space-y-6">
           {/* Title Section */}
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Upload Floor Plan</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              Upload Floor Plan
+            </h1>
             <p className="text-gray-600">
-              Upload property's floor plan for AI-powered detection & Vastu analysis
+              Upload property's floor plan for Smart detection & Vastu analysis
             </p>
           </div>
 
@@ -382,8 +441,8 @@ export default function Vaastu360Upload() {
           <Card
             className={`border-2 border-dashed transition-colors ${
               isDragOver
-                ? 'border-purple-400 bg-purple-50'
-                : 'border-gray-300 hover:border-purple-300'
+                ? "border-purple-400 bg-purple-50"
+                : "border-gray-300 hover:border-purple-300"
             }`}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
@@ -426,7 +485,7 @@ export default function Vaastu360Upload() {
               {uploadedFiles.map((uploadedFile) => (
                 <div key={uploadedFile.id} className="relative group">
                   <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden border">
-                    {uploadedFile.file.type.startsWith('image/') ? (
+                    {uploadedFile.file.type.startsWith("image/") ? (
                       <img
                         src={URL.createObjectURL(uploadedFile.file)}
                         alt={uploadedFile.file.name}
@@ -496,16 +555,25 @@ export default function Vaastu360Upload() {
                           <span>{formatFileSize(uploadedFile.file.size)}</span>
                           <span>{uploadedFile.speed}</span>
                         </div>
-                        <Progress value={uploadedFile.progress} className="h-2" />
+                        <Progress
+                          value={uploadedFile.progress}
+                          className="h-2"
+                        />
                         <div className="flex justify-between text-xs">
                           <span className="text-gray-600">
                             {uploadedFile.progress.toFixed(0)}%
                           </span>
                           <Badge
-                            variant={uploadedFile.status === 'completed' ? 'default' : 'secondary'}
+                            variant={
+                              uploadedFile.status === "completed"
+                                ? "default"
+                                : "secondary"
+                            }
                             className="text-xs"
                           >
-                            {uploadedFile.status === 'completed' ? 'Completed' : 'Uploading'}
+                            {uploadedFile.status === "completed"
+                              ? "Completed"
+                              : "Uploading"}
                           </Badge>
                         </div>
                       </div>
@@ -520,7 +588,9 @@ export default function Vaastu360Upload() {
           {uploadedFiles.length > 0 && (
             <Card>
               <CardContent className="p-6">
-                <h4 className="text-sm font-medium text-gray-900 mb-3">Upload Summary</h4>
+                <h4 className="text-sm font-medium text-gray-900 mb-3">
+                  Upload Summary
+                </h4>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Total Files:</span>
@@ -529,13 +599,21 @@ export default function Vaastu360Upload() {
                   <div className="flex justify-between">
                     <span className="text-gray-600">Completed:</span>
                     <span className="font-medium text-green-600">
-                      {uploadedFiles.filter(f => f.status === 'completed').length}
+                      {
+                        uploadedFiles.filter((f) => f.status === "completed")
+                          .length
+                      }
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Total Size:</span>
                     <span className="font-medium">
-                      {formatFileSize(uploadedFiles.reduce((total, f) => total + f.file.size, 0))}
+                      {formatFileSize(
+                        uploadedFiles.reduce(
+                          (total, f) => total + f.file.size,
+                          0,
+                        ),
+                      )}
                     </span>
                   </div>
                 </div>
@@ -552,25 +630,34 @@ export default function Vaastu360Upload() {
       <div className="space-y-8">
         {/* Title Section */}
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Review & Settings</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            Review & Settings
+          </h1>
           <p className="text-gray-600">
-            Review your uploaded files and configure analysis settings before proceeding
+            Review your uploaded files and configure analysis settings before
+            proceeding
           </p>
         </div>
 
         {/* Uploaded Files List */}
         <div className="grid gap-6">
           {uploadedFiles.map((fileData) => (
-            <div key={fileData.id} className="bg-white border border-gray-200 rounded-lg p-6">
+            <div
+              key={fileData.id}
+              className="bg-white border border-gray-200 rounded-lg p-6"
+            >
               <div className="flex items-start justify-between mb-6">
                 <div className="flex items-start space-x-4">
                   <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
                     <FileText className="w-8 h-8 text-gray-400" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-medium text-gray-900">{fileData.file.name}</h3>
+                    <h3 className="text-lg font-medium text-gray-900">
+                      {fileData.file.name}
+                    </h3>
                     <p className="text-sm text-gray-600">
-                      {(fileData.file.size / 1024 / 1024).toFixed(1)}MB • Uploaded successfully
+                      {(fileData.file.size / 1024 / 1024).toFixed(1)}MB •
+                      Uploaded successfully
                     </p>
                     <Button
                       variant="link"
@@ -581,10 +668,16 @@ export default function Vaastu360Upload() {
                     </Button>
                   </div>
                 </div>
-                <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-                  fileData.status === 'completed' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-                }`}>
-                  {fileData.status === 'completed' ? 'Ready for Analysis' : fileData.status}
+                <div
+                  className={`px-3 py-1 rounded-full text-xs font-medium ${
+                    fileData.status === "completed"
+                      ? "bg-green-100 text-green-800"
+                      : "bg-gray-100 text-gray-800"
+                  }`}
+                >
+                  {fileData.status === "completed"
+                    ? "Ready for Analysis"
+                    : fileData.status}
                 </div>
               </div>
 
@@ -593,8 +686,10 @@ export default function Vaastu360Upload() {
                 <div className="space-y-3">
                   <Label className="text-sm font-medium">Drawing Scale</Label>
                   <Select
-                    value={fileSettings[fileData.id]?.scale || '1:100'}
-                    onValueChange={(value) => updateFileSetting(fileData.id, 'scale', value)}
+                    value={fileSettings[fileData.id]?.scale || "1:100"}
+                    onValueChange={(value) =>
+                      updateFileSetting(fileData.id, "scale", value)
+                    }
                   >
                     <SelectTrigger>
                       <SelectValue />
@@ -602,17 +697,25 @@ export default function Vaastu360Upload() {
                     <SelectContent>
                       <SelectItem value="1:50">1:50 (Large scale)</SelectItem>
                       <SelectItem value="1:100">1:100 (Standard)</SelectItem>
-                      <SelectItem value="1:200">1:200 (Medium scale)</SelectItem>
+                      <SelectItem value="1:200">
+                        1:200 (Medium scale)
+                      </SelectItem>
                       <SelectItem value="1:500">1:500 (Small scale)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div className="space-y-3">
-                  <Label className="text-sm font-medium">Detection Accuracy</Label>
+                  <Label className="text-sm font-medium">
+                    Detection Accuracy
+                  </Label>
                   <Select
-                    value={fileSettings[fileData.id]?.detectionAccuracy || 'auto'}
-                    onValueChange={(value: 'auto' | 'manual') => updateFileSetting(fileData.id, 'detectionAccuracy', value)}
+                    value={
+                      fileSettings[fileData.id]?.detectionAccuracy || "auto"
+                    }
+                    onValueChange={(value: "auto" | "manual") =>
+                      updateFileSetting(fileData.id, "detectionAccuracy", value)
+                    }
                   >
                     <SelectTrigger>
                       <SelectValue />
@@ -632,10 +735,13 @@ export default function Vaastu360Upload() {
                     <span className="text-white text-xs">i</span>
                   </div>
                   <div>
-                    <h4 className="text-sm font-medium text-blue-900">Detection Accuracy</h4>
+                    <h4 className="text-sm font-medium text-blue-900">
+                      Detection Accuracy
+                    </h4>
                     <p className="text-sm text-blue-700 mt-1">
-                      Our AI will automatically detect rooms, doors, and windows in your floor plan.
-                      You can choose to review and adjust detections manually in the next step.
+                      Our Smart system will automatically detect rooms, doors,
+                      and windows in your floor plan. You can choose to review
+                      and adjust detections manually in the next step.
                     </p>
                   </div>
                 </div>
@@ -646,21 +752,27 @@ export default function Vaastu360Upload() {
 
         {/* Analysis Summary */}
         <div className="bg-white border border-gray-200 rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Analysis Summary</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Analysis Summary
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-purple-600">{uploadedFiles.length}</div>
+              <div className="text-2xl font-bold text-purple-600">
+                {uploadedFiles.length}
+              </div>
               <div className="text-sm text-gray-600">Files Uploaded</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-green-600">
-                {uploadedFiles.filter(f => f.status === 'completed').length}
+                {uploadedFiles.filter((f) => f.status === "completed").length}
               </div>
               <div className="text-sm text-gray-600">Ready for Analysis</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-blue-600">
-                {formatFileSize(uploadedFiles.reduce((total, f) => total + f.file.size, 0))}
+                {formatFileSize(
+                  uploadedFiles.reduce((total, f) => total + f.file.size, 0),
+                )}
               </div>
               <div className="text-sm text-gray-600">Total Size</div>
             </div>
@@ -686,9 +798,11 @@ export default function Vaastu360Upload() {
           {/* Progress Tracker */}
           <div className="flex items-center space-x-8">
             <div className="flex items-center space-x-2">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                currentStage >= 1 ? 'bg-green-500' : 'bg-gray-300'
-              }`}>
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                  currentStage >= 1 ? "bg-green-500" : "bg-gray-300"
+                }`}
+              >
                 {currentStage > 1 ? (
                   <CheckCircle className="h-4 w-4 text-white" />
                 ) : (
@@ -696,24 +810,37 @@ export default function Vaastu360Upload() {
                 )}
               </div>
               <div className="text-sm">
-                <div className={`font-medium ${currentStage >= 1 ? 'text-green-600' : 'text-gray-600'}`}>
+                <div
+                  className={`font-medium ${currentStage >= 1 ? "text-green-600" : "text-gray-600"}`}
+                >
                   Property Address
                 </div>
                 <div className="text-gray-500">
-                  {currentStage === 1 ? 'In Progress' : currentStage > 1 ? 'Completed' : 'Pending'}
+                  {currentStage === 1
+                    ? "In Progress"
+                    : currentStage > 1
+                      ? "Completed"
+                      : "Pending"}
                 </div>
               </div>
             </div>
 
-            <div className={`w-12 h-0.5 ${
-              currentStage >= 2 ? 'bg-green-500' : 'bg-gray-300'
-            }`}></div>
+            <div
+              className={`w-12 h-0.5 ${
+                currentStage >= 2 ? "bg-green-500" : "bg-gray-300"
+              }`}
+            ></div>
 
             <div className="flex items-center space-x-2">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                currentStage === 2 ? 'bg-purple-600' :
-                currentStage > 2 ? 'bg-green-500' : 'bg-gray-300'
-              }`}>
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                  currentStage === 2
+                    ? "bg-purple-600"
+                    : currentStage > 2
+                      ? "bg-green-500"
+                      : "bg-gray-300"
+                }`}
+              >
                 {currentStage > 2 ? (
                   <CheckCircle className="h-4 w-4 text-white" />
                 ) : (
@@ -721,34 +848,49 @@ export default function Vaastu360Upload() {
                 )}
               </div>
               <div className="text-sm">
-                <div className={`font-medium ${
-                  currentStage === 2 ? 'text-purple-600' :
-                  currentStage > 2 ? 'text-green-600' : 'text-gray-600'
-                }`}>
+                <div
+                  className={`font-medium ${
+                    currentStage === 2
+                      ? "text-purple-600"
+                      : currentStage > 2
+                        ? "text-green-600"
+                        : "text-gray-600"
+                  }`}
+                >
                   Upload Floor Plan
                 </div>
                 <div className="text-gray-500">
-                  {currentStage === 2 ? 'In Progress' : currentStage > 2 ? 'Completed' : 'Pending'}
+                  {currentStage === 2
+                    ? "In Progress"
+                    : currentStage > 2
+                      ? "Completed"
+                      : "Pending"}
                 </div>
               </div>
             </div>
 
-            <div className={`w-12 h-0.5 ${
-              currentStage >= 3 ? 'bg-green-500' : 'bg-gray-300'
-            }`}></div>
+            <div
+              className={`w-12 h-0.5 ${
+                currentStage >= 3 ? "bg-green-500" : "bg-gray-300"
+              }`}
+            ></div>
 
             <div className="flex items-center space-x-2">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                currentStage === 3 ? 'bg-purple-600' : 'bg-gray-300'
-              }`}>
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                  currentStage === 3 ? "bg-purple-600" : "bg-gray-300"
+                }`}
+              >
                 <span className="text-white font-medium text-sm">3</span>
               </div>
               <div className="text-sm">
-                <div className={`font-medium ${currentStage === 3 ? 'text-purple-600' : 'text-gray-600'}`}>
+                <div
+                  className={`font-medium ${currentStage === 3 ? "text-purple-600" : "text-gray-600"}`}
+                >
                   Confirm Rooms
                 </div>
                 <div className="text-gray-500">
-                  {currentStage === 3 ? 'In Progress' : 'Pending'}
+                  {currentStage === 3 ? "In Progress" : "Pending"}
                 </div>
               </div>
             </div>
@@ -778,11 +920,13 @@ export default function Vaastu360Upload() {
             onClick={currentStage === 3 ? startAnalysis : nextStage}
             disabled={
               (currentStage === 1 && !selectedLocation) ||
-              (currentStage === 2 && (uploadedFiles.length === 0 || uploadedFiles.some(f => f.status !== 'completed')))
+              (currentStage === 2 &&
+                (uploadedFiles.length === 0 ||
+                  uploadedFiles.some((f) => f.status !== "completed")))
             }
             className="bg-purple-600 hover:bg-purple-700 flex items-center"
           >
-            {currentStage === 3 ? 'Start Analysis' : 'Continue'}
+            {currentStage === 3 ? "Start Analysis" : "Continue"}
             {currentStage !== 3 && <ArrowRight className="ml-2 h-4 w-4" />}
           </Button>
         </div>

@@ -9,7 +9,7 @@ const MotionGifAnimation: React.FC = () => {
 
   const scenes = [
     { name: "Upload", duration: 2 },
-    { name: "AI Scan", duration: 2.5 },
+    { name: "Smart Scan", duration: 2.5 },
     { name: "Report", duration: 2 },
     { name: "Loop", duration: 1 },
   ];
@@ -56,7 +56,7 @@ const MotionGifAnimation: React.FC = () => {
         "upload+=0.8",
       );
 
-    // Scene 2: AI Scan (2-4.5s)
+    // Scene 2: Smart Scan (2-4.5s)
     mainTimeline
       .addLabel("scan", "+=0.5")
       .to(".upload-icon", { scale: 0.8, opacity: 0, duration: 0.3 }, "scan")
@@ -246,7 +246,7 @@ const MotionGifAnimation: React.FC = () => {
         </svg>
       </div>
 
-      {/* AI Scan Elements */}
+      {/* Smart Scan Elements */}
       <div className="scan-line absolute top-1/2 left-1/2 transform -translate-x-full -translate-y-1/2 w-96 h-2 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 rounded-full"></div>
       <div className="ai-brain absolute top-32 right-32 opacity-0">
         <div className="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center shadow-lg">
@@ -322,7 +322,7 @@ const MotionGifAnimation: React.FC = () => {
       {/* Brand Overlay */}
       <div className="absolute top-8 left-8 text-primary bg-white/95 backdrop-blur-sm px-6 py-4 rounded-xl shadow-lg">
         <div className="text-4xl font-bold mb-2">Vaastu360</div>
-        <div className="text-lg opacity-80">AI-Powered Analysis</div>
+        <div className="text-lg opacity-80">Smart Analysis</div>
       </div>
 
       {/* Progress Indicator */}

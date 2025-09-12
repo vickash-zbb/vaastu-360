@@ -83,62 +83,152 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      {/* Back Navigation */}
-      <div className="container mx-auto px-4 pt-8">
-        <Link
-          to="/subscription"
-          className="inline-flex items-center gap-3 text-gray-700 hover:text-blue-600 transition-all duration-200 group"
-        >
-          <div className="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-sm group-hover:shadow-md transition-shadow">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 12 12"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="group-hover:-translate-x-0.5 transition-transform"
-            >
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M12 6C12 6.41421 11.6642 6.75 11.25 6.75L2.56066 6.75L5.78033 9.96967C6.07322 10.2626 6.07322 10.7374 5.78033 11.0303C5.48744 11.3232 5.01256 11.3232 4.71967 11.0303L0.219669 6.53033C-0.0732231 6.23744 -0.0732231 5.76256 0.219669 5.46967L4.71967 0.96967C5.01256 0.676777 5.48744 0.676777 5.78033 0.96967C6.07322 1.26256 6.07322 1.73744 5.78033 2.03033L2.56066 5.25L11.25 5.25C11.6642 5.25 12 5.58579 12 6Z"
+    <div className="min-h-screen flex">
+      {/* Left Side - Visual Content */}
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-20 w-32 h-32 border-2 border-white rounded-full"></div>
+          <div className="absolute top-40 right-32 w-24 h-24 border-2 border-white rounded-lg rotate-45"></div>
+          <div className="absolute bottom-32 left-40 w-20 h-20 border-2 border-white rounded-full"></div>
+          <div className="absolute bottom-20 right-20 w-16 h-16 bg-white rounded-lg rotate-12"></div>
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 flex flex-col justify-center items-center text-white p-12 w-full">
+          {/* Logo/Icon */}
+          <div className="mb-8">
+            <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6">
+              <svg
+                className="w-10 h-10"
                 fill="currentColor"
-              />
-            </svg>
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+              </svg>
+            </div>
+            <h1 className="text-4xl font-bold mb-4">Vastu360</h1>
+            <p className="text-xl opacity-90">Smart Vastu Analysis</p>
           </div>
-          <span className="font-medium">Back to Subscription</span>
-        </Link>
+
+          {/* Features */}
+          <div className="space-y-6 w-full max-w-sm">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                <svg
+                  className="w-6 h-6"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-semibold">Accurate Analysis</h3>
+                <p className="text-sm opacity-80">
+                  Precise Vastu compliance reports
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                <svg
+                  className="w-6 h-6"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-semibold">Instant Results</h3>
+                <p className="text-sm opacity-80">
+                  Get your analysis in minutes
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                <svg
+                  className="w-6 h-6"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-semibold">Secure & Private</h3>
+                <p className="text-sm opacity-80">
+                  Your data is always protected
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Decorative Elements */}
+          <div className="absolute bottom-8 left-8 w-16 h-16 border-2 border-white/30 rounded-full"></div>
+          <div className="absolute top-8 right-8 w-12 h-12 bg-white/10 rounded-lg rotate-45"></div>
+        </div>
       </div>
 
-      {/* Main Content */}
-      <div className="container mx-auto px-4 py-12 flex justify-center">
-        <div className="w-full max-w-md">
+      {/* Right Side - Login Form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 bg-gray-50 min-h-screen">
+        <div className="w-full max-w-md space-y-6">
+          {/* Back Navigation */}
+          <div className="flex justify-start">
+            <Link
+              to="/subscription"
+              className="inline-flex items-center gap-3 text-gray-600 hover:text-blue-600 transition-all duration-200 group"
+            >
+              <div className="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-sm group-hover:shadow-md transition-shadow">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="group-hover:-translate-x-0.5 transition-transform"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M12 6C12 6.41421 11.6642 6.75 11.25 6.75L2.56066 6.75L5.78033 9.96967C6.07322 10.2626 6.07322 10.7374 5.78033 11.0303C5.48744 11.3232 5.01256 11.3232 4.71967 11.0303L0.219669 6.53033C-0.0732231 6.23744 -0.0732231 5.76256 0.219669 5.46967L4.71967 0.96967C5.01256 0.676777 5.48744 0.676777 5.78033 0.96967C6.07322 1.26256 6.07322 1.73744 5.78033 2.03033L2.56066 5.25L11.25 5.25C11.6642 5.25 12 5.58579 12 6Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <span className="font-medium">Back to Subscription</span>
+            </Link>
+          </div>
+
           {/* Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <div className="text-center mb-6">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">
               Welcome Back
-            </h1>
+            </h2>
             <p className="text-gray-600">Sign in to your Vastu360 account</p>
           </div>
 
           {/* Error/Success Messages */}
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-3">
+            <div className="p-4 bg-red-50 border border-red-200 rounded-xl flex items-center gap-3">
               <AlertCircle className="h-5 w-5 text-red-500 flex-shrink-0" />
               <p className="text-red-700 text-sm">{error}</p>
             </div>
           )}
 
           {success && (
-            <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center gap-3">
+            <div className="p-4 bg-green-50 border border-green-200 rounded-xl flex items-center gap-3">
               <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
               <p className="text-green-700 text-sm">{success}</p>
             </div>
           )}
 
           {/* Social Login Buttons */}
-          <div className="space-y-3 mb-6">
+          <div className="space-y-2 mb-4">
             <Button
               onClick={() => handleSocialLogin("google")}
               disabled={socialLoading !== null}
@@ -257,19 +347,19 @@ export default function Login() {
           </div>
 
           {/* Divider */}
-          <div className="relative mb-6">
+          <div className="relative my-4">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-300"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-gradient-to-br from-blue-50 via-white to-purple-50 text-gray-500">
+              <span className="px-4 bg-gray-50 text-gray-500">
                 Or continue with email
               </span>
             </div>
           </div>
 
           {/* Login Form */}
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               {/* First Name */}
               <div className="space-y-2">
@@ -303,7 +393,7 @@ export default function Login() {
             </div>
 
             {/* Email */}
-            <div className="space-y-2">
+            <div className="space-y-1.5">
               <label className="text-sm font-medium text-gray-700">
                 Email or Mobile Number
               </label>
@@ -313,12 +403,12 @@ export default function Login() {
                 value={formData.email}
                 onChange={handleInputChange}
                 placeholder="Enter your email or mobile"
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all duration-200"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all duration-200"
               />
             </div>
 
             {/* Password */}
-            <div className="space-y-2">
+            <div className="space-y-1.5">
               <label className="text-sm font-medium text-gray-700">
                 Password
               </label>
@@ -328,7 +418,7 @@ export default function Login() {
                 value={formData.password}
                 onChange={handleInputChange}
                 placeholder="Enter your password"
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all duration-200"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all duration-200"
               />
             </div>
 
