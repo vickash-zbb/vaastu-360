@@ -28,6 +28,14 @@ import CloseIcon from "@mui/icons-material/Close";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import TargetIcon from "@mui/icons-material/Adjust"; // Using Adjust as target-like icon
 import EditIcon from "@mui/icons-material/Edit";
+import HomeIcon from "@mui/icons-material/Home";
+import DescriptionIcon from "@mui/icons-material/Description";
+import SearchIcon from "@mui/icons-material/Search";
+import AnalyticsIcon from "@mui/icons-material/Analytics";
+import TextFieldsIcon from "@mui/icons-material/TextFields";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ScheduleIcon from "@mui/icons-material/Schedule";
 
 // Simple Location Picker without React Leaflet
 function SimpleLocationPicker({
@@ -1554,7 +1562,7 @@ export default function NewAnalysis() {
                       <EditIcon className="w-6 h-6" /> Edit Analysis Results
                     </>
                   ) : (
-                    <>🤖 AI Analysis in Progress</>
+                    <>Smart Analysis in Progress</>
                   )}
                 </h2>
                 <p className="text-purple-100 mt-1 text-sm sm:text-base">
@@ -1568,19 +1576,7 @@ export default function NewAnalysis() {
                 className="text-white hover:text-purple-200 hover:bg-purple-500 rounded-full p-2 transition-colors duration-200 ml-4 flex-shrink-0"
                 title="Close modal"
               >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
+                <CloseIcon className="w-6 h-6" />
               </button>
             </div>
 
@@ -1591,7 +1587,7 @@ export default function NewAnalysis() {
                 <div className="space-y-4">
                   <div className="flex items-center space-x-2">
                     <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                      <span className="text-blue-600 text-sm">🏠</span>
+                      <HomeIcon className="text-blue-600 w-5 h-5" />
                     </div>
                     <h3 className="text-lg font-semibold text-gray-900">
                       Floor Plan Analysis
@@ -1614,7 +1610,7 @@ export default function NewAnalysis() {
                       />
                     ) : (
                       <div className="text-center text-gray-500">
-                        <div className="text-6xl mb-4">📄</div>
+                        <DescriptionIcon className="text-6xl mb-4 text-gray-400" />
                         <p className="text-lg font-medium">Floor Plan Image</p>
                         <p className="text-sm">Image not available</p>
                       </div>
@@ -1625,10 +1621,18 @@ export default function NewAnalysis() {
                       <div className="absolute inset-0 bg-blue-500 bg-opacity-10 rounded flex items-center justify-center">
                         <div className="text-center bg-white bg-opacity-90 rounded-lg p-4 shadow-lg">
                           <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-blue-600 mx-auto mb-3"></div>
-                          <p className="text-blue-700 font-medium text-sm">
-                            {analysisResults.verified
-                              ? "✅ Analysis Complete!"
-                              : "🔍 Analyzing..."}
+                          <p className="text-blue-700 font-medium text-sm flex items-center justify-center gap-2">
+                            {analysisResults.verified ? (
+                              <>
+                                <CheckCircleIcon className="w-4 h-4" />
+                                Analysis Complete!
+                              </>
+                            ) : (
+                              <>
+                                <SearchIcon className="w-4 h-4" />
+                                Analyzing...
+                              </>
+                            )}
                           </p>
                         </div>
                       </div>
@@ -1676,7 +1680,10 @@ export default function NewAnalysis() {
                               Analysis Complete - Ready for verification
                             </>
                           ) : (
-                            "🔍 Scanning floor plan for structural elements..."
+                            <>
+                              <SearchIcon className="w-4 h-4 inline mr-1" />
+                              Scanning floor plan for structural elements...
+                            </>
                           )}
                         </p>
                         <div
@@ -1714,7 +1721,7 @@ export default function NewAnalysis() {
                 <div className="space-y-4">
                   <div className="flex items-center space-x-2">
                     <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                      <span className="text-green-600 text-sm">📊</span>
+                      <AnalyticsIcon className="text-green-600 w-5 h-5" />
                     </div>
                     <h3 className="text-lg font-semibold text-gray-900">
                       Analysis Results
@@ -1724,8 +1731,9 @@ export default function NewAnalysis() {
                   {/* OCR Text */}
                   <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
                     <div className="flex items-center justify-between mb-2">
-                      <h4 className="text-sm font-medium text-gray-700">
-                        📝 OCR Text Detected:
+                      <h4 className="text-sm font-medium text-gray-700 flex items-center gap-2">
+                        <TextFieldsIcon className="w-4 h-4" />
+                        OCR Text Detected:
                       </h4>
                       {analysisResults?.isEditing && (
                         <button
@@ -1734,9 +1742,10 @@ export default function NewAnalysis() {
                               document.getElementById("ocr-textarea");
                             if (textarea) textarea.focus();
                           }}
-                          className="text-xs text-blue-600 hover:text-blue-800"
+                          className="text-xs text-blue-600 hover:text-blue-800 flex items-center gap-1"
                         >
-                          ✏️ Edit
+                          <EditIcon className="w-3 h-3" />
+                          Edit
                         </button>
                       )}
                     </div>
@@ -1763,8 +1772,9 @@ export default function NewAnalysis() {
                   {/* Detected Rooms */}
                   <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
                     <div className="flex items-center justify-between mb-3">
-                      <h4 className="text-sm font-medium text-gray-700">
-                        🏠 Detected Rooms:
+                      <h4 className="text-sm font-medium text-gray-700 flex items-center gap-2">
+                        <HomeIcon className="w-4 h-4" />
+                        Detected Rooms:
                       </h4>
                       {analysisResults?.isEditing && (
                         <button
@@ -1789,9 +1799,10 @@ export default function NewAnalysis() {
                                 : null,
                             );
                           }}
-                          className="text-xs text-green-600 hover:text-green-800 bg-green-50 hover:bg-green-100 px-3 py-2 rounded-lg font-medium transition-colors duration-200 border border-green-200"
+                          className="text-xs text-green-600 hover:text-green-800 bg-green-50 hover:bg-green-100 px-3 py-2 rounded-lg font-medium transition-colors duration-200 border border-green-200 flex items-center gap-1"
                         >
-                          ➕ Add Room
+                          <AddIcon className="w-3 h-3" />
+                          Add Room
                         </button>
                       )}
                     </div>
@@ -1917,23 +1928,13 @@ export default function NewAnalysis() {
                                       : null,
                                   );
                                 }}
-                                className="text-red-500 hover:text-red-700 text-sm"
+                                className="text-red-500 hover:text-red-700 text-sm p-1"
                               >
-                                🗑️
+                                <DeleteIcon className="w-4 h-4" />
                               </button>
                             )}
                             <div className="text-green-600">
-                              <svg
-                                className="w-5 h-5"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
+                              <CheckCircleIcon className="w-5 h-5" />
                             </div>
                           </div>
                         </div>
@@ -1971,7 +1972,10 @@ export default function NewAnalysis() {
                               Verification Complete
                             </>
                           ) : (
-                            "⏳ Awaiting Verification"
+                            <>
+                              <ScheduleIcon className="w-4 h-4 inline mr-1" />
+                              Awaiting Verification
+                            </>
                           )}
                         </p>
                         <p
