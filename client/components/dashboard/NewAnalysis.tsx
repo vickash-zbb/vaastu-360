@@ -20,6 +20,14 @@ import {
   Map,
   Navigation,
 } from "lucide-react";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import StarIcon from "@mui/icons-material/Star";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+import SaveIcon from "@mui/icons-material/Save";
+import CloseIcon from "@mui/icons-material/Close";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import TargetIcon from "@mui/icons-material/Adjust"; // Using Adjust as target-like icon
+import EditIcon from "@mui/icons-material/Edit";
 
 // Simple Location Picker without React Leaflet
 function SimpleLocationPicker({
@@ -784,7 +792,7 @@ export default function NewAnalysis() {
           </div>
 
           {/* Upload Options */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-row gap-4 justify-center flex-wrap">
             <Button
               onClick={() => fileInputRef.current?.click()}
               variant="secondary"
@@ -820,7 +828,7 @@ export default function NewAnalysis() {
 
           {/* Drag & Drop Zone */}
           <div
-            className={`border-2 border-dashed rounded-xl p-16 text-center transition-all duration-200 ${
+            className={`border-2 border-dashed rounded-xl p-20 text-center transition-all duration-200 ${
               currentVerificationIndex >= 0 ||
               (uploadedFiles.length > 0 &&
                 !uploadedFiles[uploadedFiles.length - 1].verified)
@@ -1224,397 +1232,236 @@ export default function NewAnalysis() {
   const renderStage3 = () => (
     <div className="max-w-7xl mx-auto px-6 py-8">
       <div className="space-y-8">
-        {/* Enhanced Header Section */}
-        <div className="text-center bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-8 border border-purple-100">
-          <div className="flex items-center justify-center mb-4">
-            <div className="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
-              <CheckCircle className="w-8 h-8 text-white" />
+        {/* Redesigned Header Section */}
+        <div className="text-center bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+          <div className="flex items-center justify-center mb-6">
+            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+              <CheckCircleIcon className="text-green-600 w-6 h-6" />
             </div>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-3">
-            🎯 Review & Finalize
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            Review & Finalize
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Perfect! All your files are uploaded. Review the settings below and
-            get ready for comprehensive Vastu analysis.
+          <p className="text-gray-600 max-w-xl mx-auto mb-6">
+            All files uploaded successfully. Review your settings and start the
+            Vastu analysis.
           </p>
-          <div className="flex items-center justify-center mt-4 space-x-6">
+          <div className="flex items-center justify-center space-x-8">
             <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span className="text-sm text-gray-600">Files Ready</span>
+              <CheckCircleIcon className="w-4 h-4 text-green-500" />
+              <span className="text-sm text-gray-700 font-medium">
+                Files Ready
+              </span>
             </div>
             <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-              <span className="text-sm text-gray-600">Settings Configured</span>
+              <CheckCircleIcon className="w-4 h-4 text-blue-500" />
+              <span className="text-sm text-gray-700 font-medium">
+                Settings Configured
+              </span>
             </div>
             <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-              <span className="text-sm text-gray-600">Analysis Ready</span>
+              <RocketLaunchIcon className="w-4 h-4 text-purple-500" />
+              <span className="text-sm text-gray-700 font-medium">
+                Analysis Ready
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Enhanced Files Review Grid */}
-        <div className="grid gap-6">
-          {uploadedFiles.map((fileData, index) => (
-            <div
-              key={fileData.id}
-              className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-200"
-            >
-              {/* File Header with Enhanced Design */}
-              <div className="flex items-start justify-between mb-6">
-                <div className="flex items-start space-x-4">
-                  <div className="relative">
-                    <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl flex items-center justify-center shadow-sm">
-                      <FileText className="w-8 h-8 text-purple-600" />
+        {/* Detailed Image Results Gallery */}
+        <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+          <h3 className="text-lg font-semibold text-gray-900 mb-6">
+            Image Analysis Results
+          </h3>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {uploadedFiles.map((fileData, index) => (
+              <div
+                key={fileData.id}
+                className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+              >
+                {/* Image Header */}
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                      <FileText className="w-6 h-6 text-purple-600" />
                     </div>
-                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">
-                        {index + 1}
-                      </span>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">
+                        {fileData.file.name}
+                      </h4>
+                      <p className="text-sm text-gray-500">
+                        {(fileData.file.size / 1024 / 1024).toFixed(1)} MB •{" "}
+                        {fileData.speed}
+                      </p>
                     </div>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-1">
-                      {fileData.file.name}
-                    </h3>
-                    <div className="flex items-center space-x-4 text-sm text-gray-600">
-                      <span className="flex items-center">
-                        <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                        {(fileData.file.size / 1024 / 1024).toFixed(1)} MB
-                      </span>
-                      <span className="flex items-center">
-                        <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                        {fileData.status === "completed"
-                          ? "Verified"
+                  <div className="flex items-center space-x-2">
+                    <div
+                      className={`px-3 py-1 rounded-full text-xs font-medium ${
+                        fileData.status === "verified"
+                          ? "bg-green-100 text-green-800"
+                          : fileData.status === "completed"
+                            ? "bg-blue-100 text-blue-800"
+                            : "bg-yellow-100 text-yellow-800"
+                      }`}
+                    >
+                      {fileData.status === "verified"
+                        ? "Verified"
+                        : fileData.status === "completed"
+                          ? "Analyzed"
                           : "Processing"}
-                      </span>
-                      <span className="flex items-center">
-                        <span className="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
-                        Floor Plan {index + 1}
-                      </span>
                     </div>
+                    {fileData.verified && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => openAnalysisModal(fileData.id, true)}
+                        className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-2"
+                        title="Edit analysis results"
+                      >
+                        <EditIcon className="w-4 h-4" />
+                      </Button>
+                    )}
                   </div>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <div
-                    className={`px-4 py-2 rounded-full text-sm font-medium ${
-                      fileData.status === "completed"
-                        ? "bg-green-100 text-green-800 border border-green-200"
-                        : "bg-yellow-100 text-yellow-800 border border-yellow-200"
-                    }`}
-                  >
-                    {fileData.status === "completed"
-                      ? "✅ Ready"
-                      : "⏳ Processing"}
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => removeFile(fileData.id)}
-                    className="text-red-500 hover:text-red-700 hover:bg-red-50 p-2"
-                  >
-                    <X className="w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
 
-              {/* Enhanced Settings Grid */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                {/* Drawing Scale Setting */}
-                <div className="bg-gray-50 rounded-lg p-4 border border-gray-100">
-                  <div className="flex items-center space-x-3 mb-3">
-                    <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                      <span className="text-blue-600 text-sm">📐</span>
-                    </div>
-                    <div>
-                      <Label className="text-sm font-semibold text-gray-900">
-                        Drawing Scale
-                      </Label>
-                      <p className="text-xs text-gray-600">
-                        Floor plan measurement scale
+                {/* Image Preview */}
+                <div className="relative aspect-video bg-gray-100 rounded-lg overflow-hidden mb-4">
+                  <img
+                    src={URL.createObjectURL(fileData.file)}
+                    alt={`Floor plan ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute top-2 left-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                    Image {index + 1}
+                  </div>
+                </div>
+
+                {/* Analysis Details */}
+                <div className="space-y-3">
+                  {/* OCR Text */}
+                  {fileData.ocrText && (
+                    <div className="bg-gray-50 rounded-lg p-3">
+                      <div className="flex items-center space-x-2 mb-2">
+                        <span className="text-sm font-medium text-gray-700">
+                          OCR Text:
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-600 line-clamp-2">
+                        {fileData.ocrText}
                       </p>
                     </div>
-                  </div>
-                  <Select
-                    value={fileSettings[fileData.id]?.scale || "1:100"}
-                    onValueChange={(value) =>
-                      updateFileSetting(fileData.id, "scale", value)
-                    }
-                  >
-                    <SelectTrigger className="w-full bg-white border-gray-200 focus:ring-2 focus:ring-blue-500">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="1:50">
-                        <div className="flex items-center space-x-2">
-                          <span>📏</span>
-                          <span>1:50 (Large scale - Detailed)</span>
-                        </div>
-                      </SelectItem>
-                      <SelectItem value="1:100">
-                        <div className="flex items-center space-x-2">
-                          <span>📐</span>
-                          <span>1:100 (Standard - Recommended)</span>
-                        </div>
-                      </SelectItem>
-                      <SelectItem value="1:200">
-                        <div className="flex items-center space-x-2">
-                          <span>📊</span>
-                          <span>1:200 (Medium scale)</span>
-                        </div>
-                      </SelectItem>
-                      <SelectItem value="1:500">
-                        <div className="flex items-center space-x-2">
-                          <span>🗺️</span>
-                          <span>1:500 (Small scale - Overview)</span>
-                        </div>
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                  )}
 
-                {/* Detection Accuracy Setting */}
-                <div className="bg-gray-50 rounded-lg p-4 border border-gray-100">
-                  <div className="flex items-center space-x-3 mb-3">
-                    <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                      <span className="text-green-600 text-sm">🎯</span>
-                    </div>
-                    <div>
-                      <Label className="text-sm font-semibold text-gray-900">
-                        Detection Mode
-                      </Label>
-                      <p className="text-xs text-gray-600">
-                        AI detection accuracy level
-                      </p>
-                    </div>
-                  </div>
-                  <Select
-                    value={
-                      fileSettings[fileData.id]?.detectionAccuracy || "auto"
-                    }
-                    onValueChange={(value: "auto" | "manual") =>
-                      updateFileSetting(fileData.id, "detectionAccuracy", value)
-                    }
-                  >
-                    <SelectTrigger className="w-full bg-white border-gray-200 focus:ring-2 focus:ring-green-500">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="auto">
-                        <div className="flex items-center space-x-2">
-                          <span>🤖</span>
-                          <span>Auto Detection (Recommended)</span>
+                  {/* Detected Rooms */}
+                  {fileData.detectedRooms &&
+                    fileData.detectedRooms.length > 0 && (
+                      <div className="bg-gray-50 rounded-lg p-3">
+                        <div className="flex items-center space-x-2 mb-2">
+                          <span className="text-sm font-medium text-gray-700">
+                            Detected Rooms ({fileData.detectedRooms.length}):
+                          </span>
                         </div>
-                      </SelectItem>
-                      <SelectItem value="manual">
-                        <div className="flex items-center space-x-2">
-                          <span>👁️</span>
-                          <span>Manual Review (Advanced)</span>
+                        <div className="flex flex-wrap gap-1">
+                          {fileData.detectedRooms
+                            .slice(0, 3)
+                            .map((room, roomIndex) => (
+                              <span
+                                key={room.id}
+                                className="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded"
+                              >
+                                {room.name}
+                              </span>
+                            ))}
+                          {fileData.detectedRooms.length > 3 && (
+                            <span className="text-xs text-gray-500">
+                              +{fileData.detectedRooms.length - 3} more
+                            </span>
+                          )}
                         </div>
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
+                      </div>
+                    )}
 
-              {/* Enhanced Info Panel */}
-              <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-4">
-                <div className="flex items-start space-x-3">
-                  <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <span className="text-white text-xs font-bold">ℹ️</span>
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-semibold text-blue-900 mb-1">
-                      Smart Analysis Ready
-                    </h4>
-                    <p className="text-sm text-blue-700">
-                      Our AI will automatically detect rooms, doors, windows,
-                      and structural elements.
-                      {fileSettings[fileData.id]?.detectionAccuracy === "manual"
-                        ? " You'll have the opportunity to review and adjust all detections manually."
-                        : " The system will optimize detection accuracy automatically for best results."}
-                    </p>
+                  {/* Settings */}
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center space-x-4">
+                      <span className="text-gray-600">
+                        Scale:{" "}
+                        <span className="font-medium">
+                          {fileSettings[fileData.id]?.scale || "1:100"}
+                        </span>
+                      </span>
+                      <span className="text-gray-600">
+                        Detection:{" "}
+                        <span className="font-medium">
+                          {fileSettings[fileData.id]?.detectionAccuracy ||
+                            "auto"}
+                        </span>
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
-        {/* Enhanced Analysis Summary Dashboard */}
-        <div className="bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-xl p-8 shadow-sm">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                📊 Analysis Dashboard
-              </h3>
-              <p className="text-gray-600">
-                Comprehensive overview of your upload session
-              </p>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="text-sm text-gray-600">All systems ready</span>
-            </div>
-          </div>
-
-          {/* Enhanced Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div className="bg-white rounded-lg p-6 border border-gray-100 shadow-sm">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-gray-600">
-                    Files Uploaded
-                  </p>
-                  <p className="text-3xl font-bold text-purple-600 mt-1">
-                    {uploadedFiles.length}
-                  </p>
-                </div>
-                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                  <FileText className="w-6 h-6 text-purple-600" />
-                </div>
-              </div>
-              <div className="mt-3">
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className="bg-purple-600 h-2 rounded-full"
-                    style={{ width: "100%" }}
-                  ></div>
-                </div>
-                <p className="text-xs text-gray-500 mt-1">Complete</p>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg p-6 border border-gray-100 shadow-sm">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-gray-600">
-                    Ready for Analysis
-                  </p>
-                  <p className="text-3xl font-bold text-green-600 mt-1">
-                    {
-                      uploadedFiles.filter((f) => f.status === "completed")
-                        .length
-                    }
-                  </p>
-                </div>
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                  <CheckCircle className="w-6 h-6 text-green-600" />
-                </div>
-              </div>
-              <div className="mt-3">
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className="bg-green-600 h-2 rounded-full"
-                    style={{
-                      width: `${(uploadedFiles.filter((f) => f.status === "completed").length / uploadedFiles.length) * 100}%`,
-                    }}
-                  ></div>
-                </div>
-                <p className="text-xs text-gray-500 mt-1">
-                  {Math.round(
-                    (uploadedFiles.filter((f) => f.status === "completed")
-                      .length /
-                      uploadedFiles.length) *
-                      100,
-                  )}
-                  % ready
+        {/* Simplified Summary & Action */}
+        <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+          <div className="text-center mb-6">
+            <h3 className="text-xl font-bold text-gray-900 mb-2">
+              Analysis Summary
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+              <div>
+                <p className="text-2xl font-bold text-purple-600">
+                  {uploadedFiles.length}
                 </p>
+                <p className="text-sm text-gray-600">Files</p>
               </div>
-            </div>
-
-            <div className="bg-white rounded-lg p-6 border border-gray-100 shadow-sm">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-gray-600">
-                    Total Size
-                  </p>
-                  <p className="text-3xl font-bold text-blue-600 mt-1">
-                    {(
-                      uploadedFiles.reduce(
-                        (total, f) => total + f.file.size,
-                        0,
-                      ) /
-                      1024 /
-                      1024
-                    ).toFixed(1)}
-                  </p>
-                  <p className="text-xs text-gray-500">MB</p>
-                </div>
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <span className="text-blue-600 text-lg">💾</span>
-                </div>
+              <div>
+                <p className="text-2xl font-bold text-green-600">
+                  {uploadedFiles.filter((f) => f.status === "completed").length}
+                </p>
+                <p className="text-sm text-gray-600">Ready</p>
               </div>
-              <div className="mt-3">
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className="bg-blue-600 h-2 rounded-full"
-                    style={{ width: "85%" }}
-                  ></div>
-                </div>
-                <p className="text-xs text-gray-500 mt-1">Optimized</p>
+              <div>
+                <p className="text-2xl font-bold text-blue-600">
+                  {(
+                    uploadedFiles.reduce((total, f) => total + f.file.size, 0) /
+                    1024 /
+                    1024
+                  ).toFixed(1)}
+                </p>
+                <p className="text-sm text-gray-600">MB</p>
               </div>
-            </div>
-
-            <div className="bg-white rounded-lg p-6 border border-gray-100 shadow-sm">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-gray-600">
-                    Estimated Time
-                  </p>
-                  <p className="text-3xl font-bold text-orange-600 mt-1">
-                    {Math.max(2, uploadedFiles.length * 1.5).toFixed(0)}
-                  </p>
-                  <p className="text-xs text-gray-500">minutes</p>
-                </div>
-                <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
-                  <span className="text-orange-600 text-lg">⏱️</span>
-                </div>
-              </div>
-              <div className="mt-3">
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className="bg-orange-600 h-2 rounded-full"
-                    style={{ width: "90%" }}
-                  ></div>
-                </div>
-                <p className="text-xs text-gray-500 mt-1">Fast processing</p>
+              <div>
+                <p className="text-2xl font-bold text-orange-600">
+                  {Math.max(2, uploadedFiles.length * 1.5).toFixed(0)}
+                </p>
+                <p className="text-sm text-gray-600">Min</p>
               </div>
             </div>
           </div>
 
-          {/* Final Action Panel */}
-          <div className="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg p-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-                  <span className="text-white text-xl">🚀</span>
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900">
-                    Ready for Vastu Analysis!
-                  </h4>
-                  <p className="text-gray-600">
-                    Your files are configured and ready. Click "Start Analysis"
-                    to begin comprehensive Vastu evaluation.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center space-x-3">
-                <div className="text-right">
-                  <p className="text-sm text-gray-500">Analysis Quality</p>
-                  <div className="flex items-center space-x-1">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <span key={star} className="text-yellow-400 text-sm">
-                        ⭐
-                      </span>
-                    ))}
-                    <span className="text-sm text-gray-600 ml-1">
-                      Excellent
-                    </span>
-                  </div>
-                </div>
+          {/* Prominent Action Button */}
+          <div className="text-center">
+            <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg p-6 text-white">
+              <RocketLaunchIcon className="w-8 h-8 mx-auto mb-3" />
+              <h4 className="text-lg font-semibold mb-2">
+                Ready for Vastu Analysis!
+              </h4>
+              <p className="text-purple-100 mb-4">
+                Your files are configured and ready. Start the comprehensive
+                analysis now.
+              </p>
+              <div className="flex items-center justify-center space-x-1 mb-4">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <StarIcon key={star} className="text-yellow-300 w-5 h-5" />
+                ))}
+                <span className="text-sm text-purple-100 ml-2">
+                  Excellent Quality
+                </span>
               </div>
             </div>
           </div>
@@ -1701,10 +1548,14 @@ export default function NewAnalysis() {
             {/* Modal Header */}
             <div className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-4 sm:px-6 py-4 flex items-center justify-between shadow-lg">
               <div className="flex-1 min-w-0">
-                <h2 className="text-xl sm:text-2xl font-bold truncate">
-                  {analysisResults?.isEditing
-                    ? "✏️ Edit Analysis Results"
-                    : "🤖 AI Analysis in Progress"}
+                <h2 className="text-xl sm:text-2xl font-bold truncate flex items-center gap-2">
+                  {analysisResults?.isEditing ? (
+                    <>
+                      <EditIcon className="w-6 h-6" /> Edit Analysis Results
+                    </>
+                  ) : (
+                    <>🤖 AI Analysis in Progress</>
+                  )}
                 </h2>
                 <p className="text-purple-100 mt-1 text-sm sm:text-base">
                   {analysisResults?.isEditing
@@ -1814,11 +1665,19 @@ export default function NewAnalysis() {
                                 : "text-blue-900"
                           }`}
                         >
-                          {analysisResults?.isEditing
-                            ? "✏️ Editing Analysis Results"
-                            : analysisResults?.verified
-                              ? "✅ Analysis Complete - Ready for verification"
-                              : "🔍 Scanning floor plan for structural elements..."}
+                          {analysisResults?.isEditing ? (
+                            <>
+                              <EditIcon className="w-4 h-4 inline mr-1" />{" "}
+                              Editing Analysis Results
+                            </>
+                          ) : analysisResults?.verified ? (
+                            <>
+                              <CheckCircleIcon className="w-4 h-4 inline mr-1" />{" "}
+                              Analysis Complete - Ready for verification
+                            </>
+                          ) : (
+                            "🔍 Scanning floor plan for structural elements..."
+                          )}
                         </p>
                         <div
                           className={`w-full rounded-full h-2 mt-2 ${
@@ -2106,9 +1965,14 @@ export default function NewAnalysis() {
                               : "text-yellow-900"
                           }`}
                         >
-                          {analysisResults.verified
-                            ? "✅ Verification Complete"
-                            : "⏳ Awaiting Verification"}
+                          {analysisResults.verified ? (
+                            <>
+                              <CheckCircleIcon className="w-4 h-4 inline mr-1" />{" "}
+                              Verification Complete
+                            </>
+                          ) : (
+                            "⏳ Awaiting Verification"
+                          )}
                         </p>
                         <p
                           className={`text-xs mt-1 ${
@@ -2153,13 +2017,13 @@ export default function NewAnalysis() {
                           }}
                           className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
                         >
-                          💾 Save Changes
+                          <SaveIcon className="w-4 h-4 mr-2" /> Save Changes
                         </button>
                         <button
                           onClick={closeAnalysisModal}
                           className="flex-1 bg-gray-500 hover:bg-gray-600 text-white py-3 px-6 rounded-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg"
                         >
-                          ❌ Cancel
+                          <CloseIcon className="w-4 h-4 mr-2" /> Cancel
                         </button>
                       </>
                     ) : (
@@ -2169,16 +2033,24 @@ export default function NewAnalysis() {
                             onClick={() => verifyImage(analysisResults.fileId)}
                             className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
                           >
-                            ✅ Verify & Continue
+                            <CheckCircleIcon className="w-4 h-4 mr-2" /> Verify
+                            & Continue
                           </button>
                         )}
                         <button
                           onClick={closeAnalysisModal}
                           className="flex-1 bg-gray-500 hover:bg-gray-600 text-white py-3 px-6 rounded-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg"
                         >
-                          {analysisResults.verified
-                            ? "➡️ Continue"
-                            : "❌ Close"}
+                          {analysisResults.verified ? (
+                            <>
+                              <ArrowForwardIcon className="w-4 h-4 mr-2" />{" "}
+                              Continue
+                            </>
+                          ) : (
+                            <>
+                              <CloseIcon className="w-4 h-4 mr-2" /> Close
+                            </>
+                          )}
                         </button>
                       </>
                     )}

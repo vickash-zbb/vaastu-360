@@ -86,151 +86,331 @@ export default function SubscriptionUpgrade() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-bold tracking-tight">
-            Upgrade Your Plan
+    <section id="pricing" className="choose-plan-section py-16">
+      <div className="container mx-auto px-4">
+        {/* Section Header */}
+        <div className="plan-section-header text-center mb-12">
+          <h2 className="plan-main-title text-4xl font-bold text-gray-800 mb-4">
+            Choose Your Plan
           </h2>
-          <p className="text-muted-foreground">
-            Choose the perfect plan for your Vastu analysis needs
+          <p className="plan-subtitle text-lg text-gray-600 max-w-2xl mx-auto">
+            Start with Bronze for free and upgrade to premium features. Cancel
+            anytime, no setup fees - your satisfaction is guaranteed.
           </p>
         </div>
-      </div>
 
-      {/* Available Plans */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 py-10">
-        {availablePlans.map((plan, index) => (
-          <div
-            key={index}
-            className={`pricing-card relative bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${
-              plan.popular ? "ring-2 ring-[#421034] shadow-lg" : ""
-            } ${plan.isCurrent ? "opacity-75" : ""}`}
-          >
-            {plan.badge && (
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <span className="px-4 py-2 rounded-full text-sm font-semibold bg-[#421034] text-white">
-                  {plan.badge}
+        {/* Pricing Cards Grid */}
+        <div className="plan-cards-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Bronze Plan */}
+          <div className="plan-card bronze-plan bg-white rounded-lg shadow-lg p-6 relative border-2 border-gray-200">
+            <div className="plan-badge free-badge absolute -top-3 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
+              Free
+            </div>
+            <div className="plan-content">
+              <h3 className="plan-title text-2xl font-bold text-center mb-4 text-gray-800">
+                Bronze
+              </h3>
+              <div className="plan-pricing text-center mb-4">
+                <span className="plan-currency text-2xl font-bold text-gray-600">
+                  ₹
+                </span>
+                <span className="plan-amount text-4xl font-bold text-gray-800">
+                  0
+                </span>
+                <span className="plan-period text-lg text-gray-600">
+                  /1 Week Free
                 </span>
               </div>
-            )}
+              <p className="plan-desc text-center text-gray-600 mb-6">
+                Perfect for small spaces
+              </p>
 
-            <div className="p-8">
-              {/* Header */}
-              <div className="text-center mb-6">
-                <h3 className="text-xl font-bold text-[#421034] mb-2">
-                  {plan.name}
-                </h3>
-                <div className="flex items-baseline justify-center mb-4">
-                  <span className="text-4xl font-bold text-[#421034]">
-                    {plan.price}
+              <div className="plan-features-list space-y-3 mb-6">
+                <div className="feature-row flex justify-between items-center">
+                  <span className="feature-label text-gray-600">
+                    Area (SFT)
                   </span>
-                  <span className="text-gray-600 ml-2">
-                    {plan.price === "₹0" ? plan.period : `/${plan.period}`}
-                  </span>
+                  <span className="feature-value font-semibold">< 1000</span>
                 </div>
-                <p className="text-gray-600 text-sm">{plan.description}</p>
-              </div>
-
-              {/* Highlights Row */}
-              <div className="mb-6 py-3 px-4 bg-gray-50 rounded-lg">
-                <div className="flex items-center justify-between border-b border-gray-200 pb-2 mb-2">
-                  <div className="flex items-center">
-                    <Home className="text-[#421034] mr-2 h-5 w-5" />
-                    <span className="text-xs text-gray-500 uppercase tracking-wide">
-                      SFT
-                    </span>
-                  </div>
-                  <span className="text-sm font-medium text-[#421034]">
-                    {plan.highlights.sft}
-                  </span>
+                <div className="feature-row flex justify-between items-center">
+                  <span className="feature-label text-gray-600">Floors</span>
+                  <span className="feature-value font-semibold">1</span>
                 </div>
-                <div className="flex items-center justify-between border-b border-gray-200 pb-2 mb-2">
-                  <div className="flex items-center">
-                    <Building className="text-[#421034] mr-2 h-5 w-5" />
-                    <span className="text-xs text-gray-500 uppercase tracking-wide">
-                      Floors
-                    </span>
-                  </div>
-                  <span className="text-sm font-medium text-[#421034]">
-                    {plan.highlights.floors}
+                <div className="feature-row flex justify-between items-center">
+                  <span className="feature-label text-gray-600">
+                    Properties
                   </span>
+                  <span className="feature-value font-semibold">1</span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <MapPin className="text-[#421034] mr-2 h-5 w-5" />
-                    <span className="text-xs text-gray-500 uppercase tracking-wide">
-                      Properties
-                    </span>
-                  </div>
-                  <span className="text-sm font-medium text-[#421034]">
-                    {plan.highlights.properties}
-                  </span>
+                <div className="feature-row included flex items-center text-green-600">
+                  <svg
+                    className="w-5 h-5 mr-2"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span className="feature-text">Vastu Compliance Report</span>
                 </div>
               </div>
 
-              {/* Features */}
-              <ul className="space-y-2 mb-8">
-                {plan.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-center">
-                    <CheckCircle className="text-[#4CAF50] mr-3 h-5 w-5" />
-                    <span className="text-gray-700 text-base font-medium">
-                      {feature}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* CTA */}
               <Button
-                className={`w-full py-3 px-6 text-base font-semibold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg ${
-                  plan.isCurrent
-                    ? "bg-gray-400 text-white cursor-not-allowed"
-                    : plan.name === "Bronze"
-                      ? "bg-[#421034] hover:bg-[#2E0824] text-white"
-                      : "border-2 border-[#421034] text-[#421034] hover:bg-[#421034] hover:text-white bg-transparent"
-                }`}
-                disabled={plan.isCurrent}
-                onClick={() => !plan.isCurrent && handlePlanSelect(plan)}
+                onClick={() => handlePlanSelect(availablePlans[0])}
+                className="btn btn-primary w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300"
               >
-                {plan.cta}
+                Start Free
               </Button>
             </div>
           </div>
-        ))}
-      </div>
 
-      {/* FAQ Section */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Frequently Asked Questions</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div>
-            <h4 className="font-semibold mb-2">Can I change plans anytime?</h4>
-            <p className="text-sm text-muted-foreground">
-              Yes, you can upgrade or downgrade your plan at any time. Changes
-              take effect immediately.
-            </p>
+          {/* Silver Plan */}
+          <div className="plan-card silver-plan bg-white rounded-lg shadow-lg p-6 border-2 border-gray-200">
+            <div className="plan-content">
+              <h3 className="plan-title text-2xl font-bold text-center mb-4 text-gray-800">
+                Silver
+              </h3>
+              <div className="plan-pricing text-center mb-4">
+                <span className="plan-currency text-2xl font-bold text-gray-600">
+                  ₹
+                </span>
+                <span className="plan-amount text-4xl font-bold text-gray-800">
+                  45
+                </span>
+                <span className="plan-period text-lg text-gray-600">
+                  /1 Week
+                </span>
+              </div>
+              <p className="plan-desc text-center text-gray-600 mb-6">
+                For standard properties
+              </p>
+
+              <div className="plan-features-list space-y-3 mb-6">
+                <div className="feature-row flex justify-between items-center">
+                  <span className="feature-label text-gray-600">
+                    Area (SFT)
+                  </span>
+                  <span className="feature-value font-semibold">> 1000</span>
+                </div>
+                <div className="feature-row flex justify-between items-center">
+                  <span className="feature-label text-gray-600">Floors</span>
+                  <span className="feature-value font-semibold">3</span>
+                </div>
+                <div className="feature-row flex justify-between items-center">
+                  <span className="feature-label text-gray-600">
+                    Properties
+                  </span>
+                  <span className="feature-value font-semibold">1</span>
+                </div>
+                <div className="feature-row included flex items-center text-green-600">
+                  <svg
+                    className="w-5 h-5 mr-2"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span className="feature-text">Vastu Compliance Report</span>
+                </div>
+              </div>
+
+              <Button
+                onClick={() => handlePlanSelect(availablePlans[1])}
+                className="btn btn-outline-primary w-full border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold py-3 px-6 rounded-lg transition duration-300"
+              >
+                Join Now
+              </Button>
+            </div>
           </div>
-          <div>
-            <h4 className="font-semibold mb-2">Is there a free trial?</h4>
-            <p className="text-sm text-muted-foreground">
-              We offer a 14-day free trial for all plans. No credit card
-              required to start.
-            </p>
+
+          {/* Gold Plan (Most Popular) */}
+          <div className="plan-card gold-plan most-popular bg-white rounded-lg shadow-lg p-6 relative border-2 border-yellow-400">
+            <div className="popular-label absolute -top-3 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-white px-4 py-1 rounded-full text-sm font-semibold">
+              Most Popular
+            </div>
+            <div className="plan-content">
+              <h3 className="plan-title text-2xl font-bold text-center mb-4 text-gray-800">
+                Gold
+              </h3>
+              <div className="plan-pricing text-center mb-4">
+                <span className="plan-currency text-2xl font-bold text-gray-600">
+                  ₹
+                </span>
+                <span className="plan-amount text-4xl font-bold text-gray-800">
+                  99
+                </span>
+                <span className="plan-period text-lg text-gray-600">
+                  /1 month
+                </span>
+              </div>
+              <p className="plan-desc text-center text-gray-600 mb-6">
+                Best value for multiple properties
+              </p>
+
+              <div className="plan-features-list space-y-3 mb-6">
+                <div className="feature-row flex justify-between items-center">
+                  <span className="feature-label text-gray-600">
+                    Area (SFT)
+                  </span>
+                  <span className="feature-value font-semibold">> 1000</span>
+                </div>
+                <div className="feature-row flex justify-between items-center">
+                  <span className="feature-label text-gray-600">Floors</span>
+                  <span className="feature-value font-semibold">3</span>
+                </div>
+                <div className="feature-row flex justify-between items-center">
+                  <span className="feature-label text-gray-600">
+                    Properties
+                  </span>
+                  <span className="feature-value font-semibold">3</span>
+                </div>
+                <div className="feature-row included flex items-center text-green-600">
+                  <svg
+                    className="w-5 h-5 mr-2"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span className="feature-text">Vastu Compliance Report</span>
+                </div>
+              </div>
+
+              <Button
+                onClick={() => handlePlanSelect(availablePlans[2])}
+                className="btn btn-outline-primary w-full border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold py-3 px-6 rounded-lg transition duration-300"
+              >
+                Join Now
+              </Button>
+            </div>
           </div>
-          <div>
-            <h4 className="font-semibold mb-2">
-              What payment methods do you accept?
-            </h4>
-            <p className="text-sm text-muted-foreground">
-              We accept all major credit cards, PayPal, and bank transfers for
-              annual plans.
-            </p>
+
+          {/* Platinum Plan */}
+          <div className="plan-card platinum-plan bg-white rounded-lg shadow-lg p-6 relative border-2 border-purple-400">
+            <div className="plan-badge premium-badge absolute -top-3 left-1/2 transform -translate-x-1/2 bg-purple-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
+              Premium
+            </div>
+            <div className="plan-content">
+              <h3 className="plan-title text-2xl font-bold text-center mb-4 text-gray-800">
+                Platinum
+              </h3>
+              <div className="plan-pricing text-center mb-4">
+                <span className="plan-currency text-2xl font-bold text-gray-600">
+                  ₹
+                </span>
+                <span className="plan-amount text-4xl font-bold text-gray-800">
+                  299
+                </span>
+                <span className="plan-period text-lg text-gray-600">
+                  /2 month
+                </span>
+              </div>
+              <p className="plan-desc text-center text-gray-600 mb-6">
+                Premium with full remedies
+              </p>
+
+              <div className="plan-features-list space-y-3 mb-6">
+                <div className="feature-row flex justify-between items-center">
+                  <span className="feature-label text-gray-600">
+                    Area (SFT)
+                  </span>
+                  <span className="feature-value font-semibold">> 1000</span>
+                </div>
+                <div className="feature-row flex justify-between items-center">
+                  <span className="feature-label text-gray-600">Floors</span>
+                  <span className="feature-value font-semibold">3</span>
+                </div>
+                <div className="feature-row flex justify-between items-center">
+                  <span className="feature-label text-gray-600">
+                    Properties
+                  </span>
+                  <span className="feature-value font-semibold">10</span>
+                </div>
+                <div className="feature-row included flex items-center text-green-600">
+                  <svg
+                    className="w-5 h-5 mr-2"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span className="feature-text">Vastu Compliance Report</span>
+                </div>
+                <div className="feature-row included flex items-center text-green-600">
+                  <svg
+                    className="w-5 h-5 mr-2"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span className="feature-text">Remedies for Vastu Dosha</span>
+                </div>
+              </div>
+
+              <Button
+                onClick={() => handlePlanSelect(availablePlans[3])}
+                className="btn btn-outline-primary w-full border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold py-3 px-6 rounded-lg transition duration-300"
+              >
+                Join Now
+              </Button>
+            </div>
           </div>
-        </CardContent>
-      </Card>
-    </div>
+        </div>
+
+        {/* Guarantee Section */}
+        <div className="plan-guarantee text-center mt-12">
+          <div className="guarantee-items flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8">
+            <div className="guarantee-item flex items-center text-green-600">
+              <svg
+                className="w-5 h-5 mr-2"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span>30-day money-back guarantee</span>
+            </div>
+            <div className="guarantee-item flex items-center text-green-600">
+              <svg
+                className="w-5 h-5 mr-2"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span>Cancel anytime</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
